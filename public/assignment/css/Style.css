@@ -53,3 +53,6 @@ body{
 .form-group>label{
     white-space: nowrap;
 }
+td, th{
+    white-space: nowrap;
+}
