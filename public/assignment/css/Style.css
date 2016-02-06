@@ -27,6 +27,17 @@ body{
         width: 25%;
         float: left;
     }
+    .main{
+        padding-left: 0px;
+        padding-right:0px;
+    }
+    .main>h2{
+        font-size: 25px;
+        white-space: nowrap;
+    }
+    .main>h3{
+        font-size:20px;
+    }
 }
 @media (max-width: 630px){
     .sidebar>ul>li>a{

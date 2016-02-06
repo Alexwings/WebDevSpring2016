@@ -12,7 +12,8 @@
 
     <!-- Bootstrap core CSS -->
     <!--<link rel="stylesheet" href="../../node_modules/bootstrap/css/bootstrap.min.css">-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -21,7 +22,8 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -48,12 +50,268 @@
                 <li class="active"><a>Forms<span class="sr-only">(current)</span></a></li>
             </ul>
         </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1>Form Fields: Registration Form</h1>
+        <div class=" col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h2>Form Fields:</h2>
+            <h3>Registration Form</h3>
             <ul class="nav nav-tabs">
                 <li role="presentation"><a href="forms.html">Form</a></li>
                 <li role="presentation" class="active"><a href="fields.html">Fields</a></li>
             </ul>
+                    <form>
+                        <div class="form-group form-elem">
+                            <h4><label for="fname">First Name:</label></h4>
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="input-group">
+                                        <input type="text" id="fname" class="form-control" placeholder="first name">
+                                        <div class="input-group-btn">
+                                            <a href="#" id="fname-control"class="btn btn-default dropdown-toggle visible-xs-* hidden-sm hidden-md hidden-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list" aria-hidden="true"></span><span class="caret"></span></a>
+                                            <ul class="dropdown-menu" aria-labelledby="#fname-control">
+                                                <li><a href="#"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></li>
+                                                <li><a href="#"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></li>
+                                                <li><a href="#"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></li>
+                                                <li><a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="btn-group hidden-xs">
+                                        <a href="#" class="btn btn-default">
+                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                        </a>
+                                        <a href="#" class="btn btn-default">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        </a>
+                                        <a href="#" class="btn btn-default">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        </a>
+                                        <a href="#" class="btn btn-default">
+                                            <span class=" glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-elem">
+                            <h4><label for="lname">Last Name:</label></h4>
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="input-group">
+                                        <input type="text" id="lname" class="form-control" placeholder="last name">
+                                        <div class="input-group-btn">
+                                            <a href="#" id="lname-control"class="btn btn-default dropdown-toggle visible-xs-* hidden-sm hidden-md hidden-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list" aria-hidden="true"></span><span class="caret"></span></a>
+                                            <ul class="dropdown-menu" aria-labelledby="#lname-control">
+                                                    <li><a href="#"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></li>
+                                                    <li><a href="#"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></li>
+                                                    <li><a href="#"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></li>
+                                                    <li><a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="btn-group hidden-xs">
+                                        <a href="#" class="btn btn-default">
+                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                        </a>
+                                        <a href="#" class="btn btn-default">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        </a>
+                                        <a href="#" class="btn btn-default">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        </a>
+                                        <a href="#" class="btn btn-default">
+                                            <span class=" glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-elem">
+                            <h4><label for="date">Date of Birth:</label></h4>
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="input-group">
+                                        <input type="date" id="date" class="form-control" placeholder="mm/dd/yyyy">
+                                        <div class="input-group-btn">
+                                            <a href="#" id="date-control"class="btn btn-default dropdown-toggle visible-xs-* hidden-sm hidden-md hidden-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list" aria-hidden="true"></span><span class="caret"></span></a>
+                                            <ul class="dropdown-menu" aria-labelledby="#date-control">
+                                                <li><a href="#"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></li>
+                                                <li><a href="#"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></li>
+                                                <li><a href="#"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></li>
+                                                <li><a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="btn-group hidden-xs">
+                                        <a href="#" class="btn btn-default">
+                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                        </a>
+                                        <a href="#" class="btn btn-default">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        </a>
+                                        <a href="#" class="btn btn-default">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        </a>
+                                        <a href="#" class="btn btn-default">
+                                            <span class=" glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-elem">
+                            <h4><label for="gender">Gender:</label></h4>
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="input-group">
+                                        <div class="input-group">
+                                            <input id ="gender" type="text" class="form-control" aria-label="...">
+                                            <div class="input-group-btn">
+                                                <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="#">Male</a></li>
+                                                    <li><a href="#">Female</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="input-group-btn">
+                                            <a href="#" id="gender-control"class="btn btn-default dropdown-toggle visible-xs-* hidden-sm hidden-md hidden-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list" aria-hidden="true"></span><span class="caret"></span></a>
+                                            <ul class="dropdown-menu" aria-labelledby="#gender-control">
+                                                <li><a href="#"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></li>
+                                                <li><a href="#"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></li>
+                                                <li><a href="#"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></li>
+                                                <li><a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="btn-group hidden-xs">
+                                        <a href="#" class="btn btn-default">
+                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                        </a>
+                                        <a href="#" class="btn btn-default">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        </a>
+                                        <a href="#" class="btn btn-default">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        </a>
+                                        <a href="#" class="btn btn-default">
+                                            <span class=" glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-elem">
+                            <h4><strong>Role:</strong></h4>
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="input-group">
+                                        <div class="checkbox">
+                                            <label><input type="checkbox">Admin</label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox">Student</label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox">User</label>
+                                        </div>
+                                        <div class="input-group-btn">
+                                            <a href="#" id="role-control"class="btn btn-default dropdown-toggle visible-xs-* hidden-sm hidden-md hidden-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list" aria-hidden="true"></span><span class="caret"></span></a>
+                                            <ul class="dropdown-menu" aria-labelledby="#role-control">
+                                                <li><a href="#"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></li>
+                                                <li><a href="#"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></li>
+                                                <li><a href="#"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></li>
+                                                <li><a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="btn-group hidden-xs">
+                                        <a href="#" class="btn btn-default">
+                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                        </a>
+                                        <a href="#" class="btn btn-default">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        </a>
+                                        <a href="#" class="btn btn-default">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        </a>
+                                        <a href="#" class="btn btn-default">
+                                            <span class=" glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-elem">
+                        <h4><label for="l-a">Lisence Agreement:</label></h4>
+                        <div class="row">
+                            <div class="col-sm-6 col-md-6">
+                                <div class="input-group">
+                                    <div><label><input type="radio" name="agreement" id="l-a">Yes</label></div>
+                                    <div><label><input type="radio" name="agreement">No</label></div>
+                                    <div class="input-group-btn">
+                                        <a href="#" id="agree-control"class="btn btn-default dropdown-toggle visible-xs-* hidden-sm hidden-md hidden-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list" aria-hidden="true"></span><span class="caret"></span></a>
+                                        <ul class="dropdown-menu" aria-labelledby="#agree-control">
+                                            <li><a href="#"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></li>
+                                            <li><a href="#"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></li>
+                                            <li><a href="#"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></li>
+                                            <li><a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6">
+                                <div class="btn-group hidden-xs">
+                                    <a href="#" class="btn btn-default">
+                                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                    </a>
+                                    <a href="#" class="btn btn-default">
+                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                    </a>
+                                    <a href="#" class="btn btn-default">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </a>
+                                    <a href="#" class="btn btn-default">
+                                        <span class=" glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <hr>
+                        <div class="form-group form-elem">
+                            <h4><label for="add-new">Add New Field:</label></h4>
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="input-group">
+                                            <input id ="add-new" type="text" class="form-control" aria-label="...">
+                                            <div class="input-group-btn">
+                                                <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="#">new field</a></li>
+                                                    <li><a href="#">new field</a></li>
+                                                </ul>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="btn-group">
+                                        <a href="#" class="btn btn-default">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
         </div>
     </div>
 </div>
@@ -65,6 +323,8 @@
 <script>window.jQuery || document.write('<script src="../../node_modules/bootstrap/jquery-2.2.0.min.js"><\/script>')</script>
 <script src="../../node_modules/bootstrap/js/bootstrap.min.js"></script>-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
 </body>
 </html>
