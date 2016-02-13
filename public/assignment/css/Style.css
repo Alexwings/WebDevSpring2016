@@ -26,7 +26,7 @@ body{
         border-right: 1px solid #eee;
     }
 }
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     .sidebar>ul>li{
         display: inline;
         width: 25%;
