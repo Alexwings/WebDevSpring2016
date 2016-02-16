@@ -1,17 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-    <h1>Form</h1>
-    <ul class="nav nav-tabs">
-        <li role="presentation" class="active"><a href="#">Form</a></li>
-        <li role="presentation"><a href="fields.view.html">Fields</a></li>
-    </ul>
+    <h1>Admin</h1>
+    <h2>Users</h2>
     <div class="table-responsive">
         <table class="table table-striped table-hover">
             <tr class="info">
                 <th>
-                    <a href="#" id="form"><span class="caret"></span></a>
-                    <label for="form">Form Name</label>
+                    <a href="#" id="usr"><span class="caret"></span></a>
+                    <label for="usr">Username</label>
+                </th>
+                <th>
+                    <a href="#" id="pwd"><span class="caret"></span></a>
+                    <label for="pwd">Password</label>
+                </th>
+                <th>
+                    <a href="#" id="rol"><span class="caret"></span></a>
+                    <label for="rol">Role</label>
                 </th>
                 <th>
                     <a href="#" id="act"><span class="caret"></span></a>
@@ -19,20 +22,29 @@
                 </th>
             </tr>
             <tr>
+                <td><input class="form-control" type="text" name="username" placeholder="username"></td>
+                <td><input class="form-control" type="password" name="password" placeholder="password"></td>
                 <td>
-                    <input class="form-control" type="text" placeholder="form name">
+                    <select class="form-control" type="text" name="role">
+                        <option value="USER">User</option>
+                        <option value="ADMIN">Admin</option>
+                        <option value="STUDENT">Student</option>
+                        <option value="FACULTY">Faculty</option>
+                    </select>
                 </td>
                 <td>
                     <a href="#" class="btn btn-default btn-md">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     </a>
                     <a href="#" class="btn btn-default btn-md">
-                        <span class="glyphicon glyphicon-ok"></span>
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                     </a>
                 </td>
             </tr>
             <tr>
-                <td><a href="fields.view.html" name ="forms">Registration form</a></td>
+                <td>Alice</td>
+                <td></td>
+                <td>student</td>
                 <td>
                     <a href="#" class="btn btn-danger btn-md" name="remove">
                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
@@ -43,7 +55,9 @@
                 </td>
             </tr>
             <tr>
-                <td><a href="fields.view.html" name ="forms">Contact List</a></td>
+                <td>Bob</td>
+                <td></td>
+                <td>faculty | admin</td>
                 <td>
                     <a href="#" class="btn btn-danger btn-md" name="remove">
                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
@@ -54,7 +68,9 @@
                 </td>
             </tr>
             <tr>
-                <td><a href="fields.view.html">To do List</a></td>
+                <td>Charlie</td>
+                <td></td>
+                <td></td>
                 <td>
                     <a href="#" class="btn btn-danger btn-md" name="remove">
                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
@@ -67,4 +83,3 @@
         </table>
     </div>
 </div>
-</html>
