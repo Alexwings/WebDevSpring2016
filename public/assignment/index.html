@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="FormMakerApp">
+<html lang="en" ng-app="FormBuilderApp">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>welcome to Form Maker</title>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          crossorigin="anonymous">
 
     <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+          crossorigin="anonymous">
     <!-- My own css -->
     <link rel="stylesheet" href="css/style.css">
 
@@ -26,8 +28,16 @@
 
     <!-- Other controllers, app.js and config.js -->
     <script src="app.js"></script>
+    <script src="config.js"></script>
 </head>
-<body>
+<body ng-controller="MainController">
+<div ng-include="'views/header/header.view.html'"></div>
 
+<div class="container-fluid">
+    <div class="row">
+        <div ng-include="'views/sidebar/sidebar.view.html'"></div>
+        <div ng-view></div>
+    </div>
+</div>
 </body>
 </html>
