@@ -7,28 +7,15 @@
     <title>welcome to Form Maker</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-          crossorigin="anonymous">
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
-          crossorigin="anonymous">
+          integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
     <!-- My own css -->
     <link rel="stylesheet" href="css/style.css">
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
 
-    <!-- 2.X version of jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-
-    <!-- AngularJS 1 -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
-    <!-- AngularJS Routing -->
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.min.js"></script>
-
-    <!-- Other controllers, app.js and config.js -->
-    <script src="app.js"></script>
-    <script src="config.js"></script>
 </head>
 <body ng-controller="MainController">
 <div ng-include="'views/header/header.view.html'"></div>
@@ -39,5 +26,23 @@
         <div ng-view></div>
     </div>
 </div>
+
+<!-- 1.X version of jQuery -->
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+<!-- AngularJS 1 -->
+<script src="https://code.angularjs.org/1.5.0/angular.js"></script>
+<!-- AngularJS Routing -->
+<script src="https://code.angularjs.org/1.5.0/angular-route.js"></script>
+<!-- Other controllers, app.js and config.js -->
+<script src="app.js"></script>
+<script src="config.js"></script>
+<script src="views/main/main.controller.js"></script>
+<script src="views/header/header.controller.js"></script>
+<script src="views/sidebar/sidebar.controller.js"></script>
 </body>
 </html>
