@@ -1,8 +1,10 @@
 <div class="col-sm-3 col-md-2 sidebar" ng-controller="SidebarController">
     <ul class="nav nav-sidebar">
-        <li ng-class="homeActive"><a href="#/home">Home</a></li>
-        <li ng-class="profileActive" ng-show="user"><a href="#/profile">Profile</a></li>
-        <li ng-class="formActive" ng-show="user"><a href="#/forms">Forms</a></li>
-        <li ng-class="adminActive" ng-show="user && user.role =='admin'"><a href="#/admin">Admin</a></li>
+        <li ng-class="{'active' : location.url().indexOf('home') != -1}"><a href="#/home">Home</a></li>
+        <li ng-class="{'active' : location.url().indexOf('profile') != -1}"><a href="#/profile">Profile</a></li>
+        <li ng-class="{'active' : location.url().indexOf('form') != -1}" ng-show="user"><a href="#/forms">Forms</a></li>
+        <li ng-class="{'active' : location.url().indexOf('admin') != -1}" ng-show="user && user.roles.indexOf('admin') != -1">
+            <a href="#/admin">Admin</a>
+        </li>
     </ul>
 </div>

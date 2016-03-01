@@ -3,19 +3,8 @@
         .module("FormBuilderApp")
         .controller("SidebarController", SidebarController);
     function SidebarController($scope, $location){
-        $scope.location = $location;
-        var url = $location.url();
-        $scope.homeActive = {
-            'active': url.indexOf('home') != -1
-        }
-        $scope.profileActive = {
-            'active': url.indexOf('profile') != -1
-        }
-        $scope.formActive = {
-            'active': url.indexOf('form') != -1
-        }
-        $scope.adminActive = {
-            'active': url.indexOf('admin') != -1
-        }
+        $scope.location = $location
+        $scope.user = {	"_id":456, "firstName":"Dan", "lastName":"Craig",
+            "username":"dan",    "password":"dan",     "roles": ["faculty", "admin"]}
     }
 })()

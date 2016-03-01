@@ -2,32 +2,44 @@
     <h1>Register</h1>
     <form class="form-horizontal">
         <div class="form-group">
+            <label for="inputfirst" class="col-sm-1 col-md-1 control-label">First Name:</label>
+            <div class="col-sm-8 col-sm-offset-1 col-md-9 col-md-offset-1">
+                <input ng-model="user.firstName" type="text" class="form-control" id="inputfirst" placeholder="First Name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputlast" class="col-sm-1 col-md-1 control-label">Last Name:</label>
+            <div class="col-sm-8 col-sm-offset-1 col-md-9 col-md-offset-1">
+                <input ng-model="user.lastName" type="text" class="form-control" id="inputlast" placeholder="Last Name">
+            </div>
+        </div>
+        <div class="form-group">
             <label for="inputusername" class="col-sm-1 col-md-1 control-label">Username:</label>
             <div class="col-sm-8 col-sm-offset-1 col-md-9 col-md-offset-1">
-                <input type="text" class="form-control" id="inputusername" placeholder="username">
+                <input ng-model="user.username" type="text" class="form-control" id="inputusername" placeholder="username">
             </div>
         </div>
         <div class="form-group">
             <label for="inputpassword" class="col-sm-1 col-md-1 control-label">Password:</label>
             <div class="col-sm-8 col-sm-offset-1 col-md-9 col-md-offset-1">
-                <input type="password" class="form-control" id="inputpassword" placeholder="password">
+                <input ng-model="user.password" type="password" class="form-control" id="inputpassword" placeholder="password">
             </div>
         </div>
         <div class="form-group">
             <label for="inputverify" class="col-sm-1 col-md-1 control-label">Verify Password:</label>
             <div class="col-sm-8 col-sm-offset-1 col-md-9 col-md-offset-1">
-                <input type="password" class="form-control" id="inputverify" placeholder="Verify Password">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputemail" class="col-sm-1 col-md-1 control-label">Email:</label>
-            <div class="col-sm-8 col-sm-offset-1 col-md-9 col-md-offset-1">
-                <input type="email" class="form-control" id="inputemail" placeholder="Email">
+                <input ng-model="user.verify" type="password" class="form-control" id="inputverify" placeholder="verify password">
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2">
-                <button type="submit" class="btn btn-default">Register</button>
+                <label><input ng-model="user.std_checked" type="checkbox" checked>Student</label>
+                <label><input ng-model="user.fac_cehcked" type="checkbox">Faculty</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2">
+                <button class="btn btn-default" ng-click="register(user)">Register</button>
             </div>
         </div>
     </form>
