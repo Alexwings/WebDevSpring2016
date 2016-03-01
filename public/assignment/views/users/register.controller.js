@@ -7,7 +7,7 @@
         .controller("RegisterController", RegisterController);
     function RegisterController($scope, $rootScope, $location, UserService) {
         $scope.register = function (user) {
-            var roles = []
+            var roles = [];
             if (user.std_checked) roles.push("student");
             if (user.fac_checked) roles.push("faculty");
             if (roles.length == 0) {
@@ -22,8 +22,8 @@
                 var callback = function (user) {
                     return user;
                 }
-                $rootScope.users.push(UserService.createUser(usr, callback));
-                $location.path("/profile")
+                $rootScope.currentUser=UserService.createUser(usr, callback);
+                $location.path("/profile");
             }
         }
     }

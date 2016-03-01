@@ -52,11 +52,15 @@
 
         function createUser(usr, callback) {
             var new_user = {
-                "_id": (new Date).getdate(), "firstName": usr.firstName, "lastName": usr.lastName,
+                "_id": produceId(new Date()), "firstName": usr.firstName, "lastName": usr.lastName,
                 "username": usr.username, "password": usr.password, "roles": usr.roles
             };
             users.push(new_user);
             callback(new_user);
+        }
+        function produceId(date){
+            var id = date.getMilliseconds();
+            return id;
         }
 
         function deleteUserById(usrId, callback) {
