@@ -28,6 +28,7 @@
         ];
         var service = {
             'findUserByCredentials': findUserByCredentials,
+            'findUserByUsername':findUserByUsername,
             'findAllUsers': findAllUsers,
             'createUser': createUser,
             'deleteUserById': deleteUserById,
@@ -39,6 +40,17 @@
             for (var i = 0; i < users.length; i++) {
                 var user = users[i];
                 if (user.username == username && user.password == password) {
+                    usr = user;
+                    break;
+                }
+            }
+            callback(usr);
+        }
+        function findUserByUsername(username, callback){
+            var usr=null;
+            for(var i = 0; i<users.length; i++){
+                var user = users[i];
+                if(user.username == username){
                     usr = user;
                     break;
                 }
@@ -81,7 +93,6 @@
 
         function updateUser(userId, user, callback) {
             var found = false;
-            var result = null;
             for (var i = 0; i < users.length; i++) {
                 var usr = users[i];
                 if (usr._id == userId) {

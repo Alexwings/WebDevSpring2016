@@ -4,38 +4,35 @@
         <div class="form-group">
             <label for="username" class="col-sm-1 col-md-1 control-label">Username:</label>
             <div class="col-sm-8 col-sm-offset-1 col-md-9 col-md-offset-1">
-                <input ng-model="user.username" type="text" class="form-control" id="username" placeholder={{user.username}}>
+                <p ng-model="user.username" class="form-control-static" id="username">{{user.username}}</p>
             </div>
         </div>
         <div class="form-group">
             <label for="password" class="col-sm-1 col-md-1 control-label">Password:</label>
             <div class="col-sm-8 col-sm-offset-1 col-md-9 col-md-offset-1">
-                <input ng-model="user.password" type="password" class="form-control" id="password" placeholder={{user.password}}>
+                <input ng-model="user.password" type="password" class="form-control" id="password">
             </div>
         </div>
         <div class="form-group">
             <label for="firstname" class="col-sm-1 col-md-1 control-label">First Name:</label>
             <div class="col-sm-8 col-sm-offset-1 col-md-9 col-md-offset-1">
-                <input ng-model="user.firstName" type="text" class="form-control" id="firstname" placeholder={{user.firstName}}>
+                <input ng-model="user.firstName" type="text" class="form-control" id="firstname">
             </div>
         </div>
         <div class="form-group">
             <label for="lastname" class="col-sm-1 col-md-1 control-label">Last Name:</label>
             <div class="col-sm-8 col-sm-offset-1 col-md-9 col-md-offset-1">
-                <input ng-model="user.lastName" type="text" class="form-control" id="lastname" placeholder={{user.lastName}}>
+                <input ng-model="user.lastName" type="text" class="form-control" id="lastname">
             </div>
         </div>
         <div class="form-group">
-            <label for="inputroles" class="col-sm-1 col-md-1 control-label">Roles:</label>
-            <div class="col-sm-8 col-sm-offset-1 col-md-9 col-md-offset-1">
-                <input ng-model="user.roles = " type="text" class="form-control" id="inputroles" placeholder={{user.roles.toString()}} disabled>
+            <label class="col-sm-1 col-md-1 control-label">Roles: </label>
+            <div class="col-sm-8 col-sm-offset-1 col-md-9 col-md-offset-1 checkbox">
+                <label><input ng-model="user.student" type="checkbox" >student</label>
+                <label><input ng-model="user.faculty" type="checkbox" class="form-inline">faculty</label>
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2">
-                <button ng-click="update(user)" type="submit" class="btn btn-default">Update</button>
-            </div>
-        </div>
+            <button ng-click="update(user)" class="btn btn-primary col-xs-12 col-sm-10 col-md-9 col-md-offset-2 col-lg-9 col-lg-offset-2">Update</button>
     </form>
 </div>
 

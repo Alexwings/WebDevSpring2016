@@ -7,14 +7,32 @@
         .controller("ProfileController", ProfileController);
     function ProfileController($scope, $location, $rootScope, UserService){
         $scope.user = $rootScope.currentUser;
-        var update = function (user) {
-            var callback = function (user) {
-                return user;
+        $scope.update = function (u) {
+            var usrId = null;
+            var success = false;
+            var usr = {firstName:u.firstName, lastName: u.lastName,
+                username: u.username, password: u.password, roles:getRoles(u.student, u.faculty)};
+
+            function getRoles(std, fac){
+                var roles = [];
+                if(std) roles.push("student");
+                if(fac) roles.push("faculty");
+                return roles;
             }
-            var usr = UserService.findUserByCredentials(user.username, user.password, callback);
-            var updatedUser = Userservice.updateUser(usr._id, user, callback);
-            $rootScope.currentUser = updatedUser;
-            $location.path("/profile");
+            function findUserCallback(v) {
+                usrId = v._id;
+            }
+            function updateCallback(v) {
+                usr = v;
+                success = true
+            }
+
+            UserService.findUserByUsername(u.username, findUserCallback);
+            UserService.updateUser(usrId, usr, updateCallback);
+            $rootScope.currentUser = usr;
+            console.log($rootScope.currentUser)
+            console.log(success)
+            if(success) alert("User information updated successfully")
         };
     }
 })()
