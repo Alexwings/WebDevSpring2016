@@ -71,7 +71,7 @@
             callback(new_user);
         }
         function produceId(date){
-            var id = date.getMilliseconds();
+            var id = date.now().toString();
             return id;
         }
 

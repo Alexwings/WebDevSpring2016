@@ -64,3 +64,6 @@ body{
 td, th{
     white-space: nowrap;
 }
+.warn{
+    color:red;
+}
