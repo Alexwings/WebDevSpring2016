@@ -46,7 +46,7 @@
             var callback = callback;
             FormService.updateFormById(formId,form,callback);
             function callback(new_form){
-                alert("Form updated!!");
+                $scope.selected = null;
             }
         }
         function deleteForm(index){
@@ -55,6 +55,7 @@
             var success = false;
             FormService.deleteFormById(form._id, callback);
             function callback(fs){
+                $scope.selected = null;
                 success = true;
             }
             if (success){
