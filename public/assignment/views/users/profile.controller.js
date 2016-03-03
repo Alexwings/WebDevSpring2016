@@ -11,12 +11,27 @@
             var usrId = null;
             var success = false;
             var usr = {firstName:u.firstName, lastName: u.lastName,
-                username: u.username, password: u.password, roles:getRoles(u.student, u.faculty)};
+                username: u.username, password: u.password, roles:getRoles(u.student, u.faculty, u.roles)};
 
-            function getRoles(std, fac){
-                var roles = [];
-                if(std) roles.push("student");
-                if(fac) roles.push("faculty");
+            function getRoles(std, fac, rols){
+                var roles= [];
+                function contains(rol, str){
+                    for(var i = 0; i < rol.length; i++){
+                        if (rol[i] == str) return true;
+                    }
+                    return false;
+                }
+                if(rols.length){
+                    for(var i = 0; i < rols.length;i++){
+                        roles.push(rols[i]);
+                    }
+                };
+                if(std && !contains(roles, "student")) {
+                    roles.push("student");
+                }
+                if(fac && !contains(roles, "faculty")) {
+                    roles.push("faculty");
+                }
                 return roles;
             }
             function findUserCallback(v) {

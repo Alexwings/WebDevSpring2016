@@ -7,10 +7,7 @@
         .controller("FormController", FormController);
     function FormController($scope, $location, FormService, UserService){
         var formsOfUser;
-        var curUser = {
-            "_id": 123, "firstName": "Alice", "lastName": "Wonderland",
-            "username": "alice", "password": "alice", "roles": ["student"]
-        }
+        var curUser = UserService.getCurrentUser();
         var findAllFormCallback = function(forms){
             formsOfUser = forms;
         }
