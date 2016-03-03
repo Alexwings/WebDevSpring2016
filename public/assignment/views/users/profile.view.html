@@ -26,8 +26,9 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-1 col-md-1 control-label">Roles: {{user.roles.toString()}}</label>
+            <label class="col-sm-1 col-md-1 control-label">Roles: </label>
             <div class="col-sm-8 col-sm-offset-1 col-md-9 col-md-offset-1 checkbox">
+                <span>  Current role: <strong>{{currentUser.roles.toString()}}</strong></span>
                 <label><input ng-model="user.student" type="checkbox" >student</label>
                 <label><input ng-model="user.faculty" type="checkbox" class="form-inline">faculty</label>
             </div>

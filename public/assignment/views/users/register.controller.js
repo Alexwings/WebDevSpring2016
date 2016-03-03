@@ -5,7 +5,7 @@
     angular
         .module("FormBuilderApp")
         .controller("RegisterController", RegisterController);
-    function RegisterController($scope, $rootScope, $location, UserService) {
+    function RegisterController($scope, $location, UserService) {
         $scope.register = function (user) {
             var new_user = null;
             if (user.verify != user.password) {
@@ -16,7 +16,7 @@
                     "username": user.username, "password": user.password, "roles": []
                 };
                 var callback = function (user) {
-                    $rootScope.currentUser = user;
+                    UserService.setCurrentUser(user);
                 }
                 UserService.createUser(new_user, callback);
                 $location.path("/profile");

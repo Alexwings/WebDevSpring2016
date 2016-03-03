@@ -2,9 +2,8 @@
     angular
         .module("FormBuilderApp")
         .factory("UserService", UserService);
-    function UserService() {
-        var users;
-        users = [
+    function UserService($rootScope) {
+        var users = [
             {
                 "_id": 123, "firstName": "Alice", "lastName": "Wonderland",
                 "username": "alice", "password": "alice", "roles": ["student"]
@@ -32,7 +31,9 @@
             'findAllUsers': findAllUsers,
             'createUser': createUser,
             'deleteUserById': deleteUserById,
-            'updateUser': updateUser
+            'updateUser': updateUser,
+            'setCurrentUser': setCurrentUser,
+            'getCurrentUser': getCurrentUser
         };
         return service
         function findUserByCredentials(username, password, callback) {
@@ -71,7 +72,7 @@
             callback(new_user);
         }
         function produceId(date){
-            var id = date.now().toString();
+            var id = date.getTime();
             return id;
         }
 
@@ -109,6 +110,12 @@
             if (!found) {
                 alert("User ID not found!");
             }
+        }
+        function setCurrentUser(user){
+            $rootScope.currentUser = user;
+        }
+        function getCurrentUser(){
+            return $rootScope.currentUser;
         }
     }
 })();

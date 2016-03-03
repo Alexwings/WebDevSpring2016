@@ -13,7 +13,7 @@
                 <input ng-model="user.password" type="password" id="password" class="form-control" placeholder="password">
             </div>
         </div>
-        <p class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-9 col-md-offset-2 warn" ng-if="!exist">
+        <p class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-9 col-md-offset-2 warn" ng-hide="exist">
             <strong>username or password is not valid</strong>
         </p>
         <button ng-click="login(user)" class="btn btn-primary col-xs-12 col-sm-8 col-sm-offset-2 col-md-9 col-md-offset-2">Login</button>

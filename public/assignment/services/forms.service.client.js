@@ -5,7 +5,7 @@
     angular
         .module("FormBuilderApp")
         .factory("FormService", FormService);
-    function FromService($rootScope){
+    function FormService(){
         var forms = [
             {"_id": "000", "title": "Contacts", "userId": 123},
             {"_id": "010", "title": "ToDo",     "userId": 123},
@@ -26,7 +26,7 @@
         };
         //helper function to produce unique ID
         function produceId(date){
-            return date.now().toString();
+            return date.getTime();
         }
         function findAllFormsForUser(userId, callback){
             var result_forms = [];

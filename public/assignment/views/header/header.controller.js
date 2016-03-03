@@ -2,9 +2,13 @@
     angular
         .module('FormBuilderApp')
         .controller('HeaderController',HeaderController);
-    function HeaderController($scope, $location, $rootScope)
+    function HeaderController($scope, $location, UserService)
     {
         $scope.location = $location;
-        $scope.user = $rootScope.currentUser;
+        $scope.logout = logout;
+        function logout(){
+            UserService.setCurrentUser(null);
+            $location.path("/home");
+        }
     }
 })();

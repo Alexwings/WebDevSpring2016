@@ -5,8 +5,8 @@
     angular
         .module("FormBuilderApp")
         .controller("ProfileController", ProfileController);
-    function ProfileController($scope, $location, $rootScope, UserService){
-        $scope.user = $rootScope.currentUser;
+    function ProfileController($scope, $location, UserService){
+        $scope.user = UserService.getCurrentUser();
         $scope.update = function (u) {
             var usrId = null;
             var success = false;
@@ -29,9 +29,8 @@
 
             UserService.findUserByUsername(u.username, findUserCallback);
             UserService.updateUser(usrId, usr, updateCallback);
-            $rootScope.currentUser = usr;
+            UserService.setCurrentUser(usr);
             console.log($rootScope.currentUser)
-            console.log(success)
             if(success) alert("User information updated successfully")
         };
     }
