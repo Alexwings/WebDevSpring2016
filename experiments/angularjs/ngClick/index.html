@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="WhiteBoardApp">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular.js"></script>
+    <script src="app.js"></script>
+    <title>Ng Click</title>
+</head>
+<body>
+<div class="container" ng-controller="NgClickController">
+    <h1>Ng Click</h1>
+
+    <h2>Set String on Click</h2>
+
+    <div class="row">
+        <div class="col-xs-6">
+            <button ng-click="say='Hello'" class="btn btn-primary">Say Hello</button><br/>
+            Say: {{say}}
+        </div>
+        <div class="col-xs-6">
+<pre>
+&lt;button ng-click=&quot;say=&#39;Hello&#39;&quot;&gt;Say Hello&lt;/button&gt;
+Say: <code ng-non-bindable>{{say}}</code></pre>
+        </div>
+    </div>
+
+    <h2>Do Math on Click</h2>
+
+    <div class="row">
+        <div class="col-xs-6">
+            <a href="#" ng-click="a = 2 + 3" class="btn btn-success">Add 2 + 3</a><br/>
+            2 + 3 = {{a}}
+        </div>
+        <div class="col-xs-6">
+<pre>
+&lt;a href=&quot;#&quot; ng-click=&quot;a = 2 + 3&quot;&gt;Add 2 + 3&lt;/a&gt;
+2 + 3 = <code ng-non-bindable>{{a}}</code></pre>
+        </div>
+    </div>
+
+    <h2>Controller Event Handler</h2>
+
+    <div class="row">
+        <div class="col-xs-6">
+            <button ng-click="setLorem()" class="btn btn-danger">Set Lorem</button>
+            <p>{{lorem}}</p>
+<pre>
+&lt;button ng-click=&quot;setLorem()&quot;&gt;Set Lorem&lt;/button&gt;
+&lt;p&gt;<code ng-non-bindable>{{lorem}}</code>&lt;/p&gt;</pre>
+        </div>
+        <div class="col-xs-6">
+<pre>
+function NgClickController($scope) {
+  $scope.setLorem = function() {
+    $scope.lorem = "Lorem ipsum dolor ... magna aliqua";
+  }
+}
+</pre>
+        </div>
+    </div>
+
+    <h2>Send Parameters to Event Handlers</h2>
+
+    <div class="row">
+        <div class="col-xs-6">
+            <a href="#" ng-click="add(4,5)" class="btn btn-warning">Add 4 + 5</a><br/>
+            4 + 5 = {{result}}
+        </div>
+        <div class="col-xs-6">
+<pre>
+$scope.add = addIntegers;
+function addIntegers(a, b) {
+  $scope.result = a + b;
+}
+</pre>
+        </div>
+    </div>
+</div>
+</body>
+</html>
