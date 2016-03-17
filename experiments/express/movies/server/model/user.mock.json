@@ -1,17 +1,7 @@
 [
-  {
-    "id": 123,
-    "username": "alice",
-    "password": "alice"
-  },
-  {
-    "id": 234,
-    "username": "bob",
-    "password": "bob"
-  },
-  {
-    "id": 345,
-    "username": "charlie",
-    "username": "charlie"
-  }
+  {"_id": 123, "firstName": "Alice", 	"lastName": "Wonderland",	"username": "alice", "password": "alice"},
+  {"_id": 234, "firstName": "Bob",	"lastName": "Hope", "username": "bob", "password": "bob"},
+  {"_id": 345, "firstName": "Charlie","lastName": "Brown", "username": "charlie", "password": "charlie"},
+  {"_id": 456, "firstName": "Dan",	"lastName": "Craig", "username": "dan", "password": "dan"},
+  {"_id": 567, "firstName": "Edward","lastName": "Norton",	"username": "ed",	"password": "ed"}
 ]

@@ -11,14 +11,9 @@
             if (user.verify != user.password) {
                 alert("Password can't be verified!!")
             } else {
-                new_user = {
-                    "firstName": null, "lastName": null,
-                    "username": user.username, "password": user.password, "roles": []
-                };
-                var callback = function (user) {
-                    UserService.setCurrentUser(user);
-                }
-                UserService.createUser(new_user, callback);
+                new_user = {"username": user.username, "password": user.password};
+                var registed_user = UserService.createUser(new_user);
+                UserService.setCurrentUser(registed_user);
                 $location.path("/profile");
             }
         }
