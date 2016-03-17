@@ -41,10 +41,14 @@ module.exports = function(app, db) {
         return null;
     }
     function create(user){
-        var usr = {"_id": produceId(new Date()), "firstName": user.firstName, "lastName": user.lastName,
-            "username": user.username, "password": user.password, "roles": user.roles}
-        users.push(usr);
-        return usr;
+        var found = findByUsername(user.username);
+        if(!found){
+            var usr = {"_id": produceId(new Date()), "firstName": user.firstName, "lastName": user.lastName,
+                "username": user.username, "password": user.password, "roles": user.roles}
+            users.push(usr);
+            return usr;
+        }
+        return null;
     }
     function remove(id){
         for(var i = 0; i < users.length; i++){

@@ -6,16 +6,20 @@
         .module("FormBuilderApp")
         .controller("RegisterController", RegisterController);
     function RegisterController($scope, $location, UserService) {
-        $scope.register = function (user) {
-            var new_user = null;
-            if (user.verify != user.password) {
-                alert("Password can't be verified!!")
-            } else {
-                new_user = {"username": user.username, "password": user.password};
-                var registed_user = UserService.createUser(new_user);
-                UserService.setCurrentUser(registed_user);
-                $location.path("/profile");
+        $scope.register = regist;
+        function regist(user){
+            if ($scope.verify == user.password){
+                var new_user = {"username": user.username, "password": user.password};
+                UserService.createUser(new_user).then(registered, rejected);
             }
+        }
+        function registered(data){
+            UserService.setCurrentUser(data);
+            $location.path("/profile");
+        }
+        function rejected(error){
+            alert("Cannot register! Try change another username!");
+            console.log("Cannot create user!");
         }
     }
 })()

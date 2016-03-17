@@ -98,9 +98,9 @@ module.exports = function(app, db){
     function addField(formId, field){
         var form = findById(formId);
         var f = {"_id": Uuid.raw()};
-        for((key, value) in field){
+        for(key in field){
             if(!f.key){
-                f.key = value;
+                f.key = field.key;
             }
         }
         form.fields.push(f);
@@ -109,8 +109,8 @@ module.exports = function(app, db){
     function updateField(formId, fieldId, newfield){
         var field = findField(formId, fieldId);
         if(field){
-            for((key, value) in newfield){
-                field.key = value;
+            for(key in newfield){
+                field.key = newfield.key;
             }
         }
         return field;

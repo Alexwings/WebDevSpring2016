@@ -49,7 +49,7 @@
             return $rootScope.currentUser;
         }
         function renderSuccess(response){
-            if(response.data){
+            if(response.data == null){
                 return $q.reject(response.data);
             }
             return response.data;

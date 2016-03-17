@@ -11,18 +11,14 @@
         function updateInfo(u){
             var usr = {firstName:u.firstName, lastName: u.lastName,
                 username: u.username, password: u.password, roles:getRoles(u.student, u.faculty, u.roles)};
-            var userId;
-            UserService.findUserByUsername(u.username).then(foundId, rejected);
-            UserService.updateUser(usrId, usr).then(updated, rejected);
-        }
-        function foundId(data){
-            userId = data._id;
-        }
-        function updated(data){
-            UserService.setCurrentUser(data);
-        }
-        function rejected(error){
-            console.log("Something wrong with user client service!");
+            var userId = u._id;
+            UserService.updateUser(userId, usr).then(updated, rejected);
+            function updated(data){
+                UserService.setCurrentUser(data);
+            }
+            function rejected(error){
+                console.log("Something wrong with user client service!");
+            }
         }
         function getRoles(std, fac, rols){
             var roles= [];
@@ -32,7 +28,7 @@
                 }
                 return false;
             }
-            if(rols.length){
+            if(rols){
                 for(var i = 0; i < rols.length;i++){
                     roles.push(rols[i]);
                 }

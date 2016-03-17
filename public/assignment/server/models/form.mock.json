@@ -16,7 +16,7 @@
         "fields": [
           {"_id": "777", "label": "Title", "type": "TEXT", "placeholder": "Title"},
           {"_id": "888", "label": "Description", "type": "TEXTAREA", "placeholder": "Title"},
-          {"_id": "999", "label": "Due Date", "type": "DATE"},
+          {"_id": "999", "label": "Due Date", "type": "DATE"}
         ]
       }
 ]
