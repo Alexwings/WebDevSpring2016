@@ -2,7 +2,7 @@
  * Created by Alex on 3/14/2016.
  */
 var forms = require("./form.mock.json");
-
+var uuid = require('node-uuid');
 module.exports = function(app, db){
     var api = {
         'FindAll': findAll,
@@ -43,11 +43,9 @@ module.exports = function(app, db){
     }
     function create(form){
         if(!findByTitle(form.title)){
-            var f = {'_id': Uuid.raw(), 'userId': form.userId, 'fields': form.fields};
+            var f = {'_id': uuid.v1(), 'title': form.title, 'userId': form.userId, 'fields': form.fields};
             forms.push(f);
-            return f;
         }
-        return null;
     }
     function remove(id){
         for(var i = 0; i < forms.length; i++){

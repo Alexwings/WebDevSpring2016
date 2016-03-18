@@ -15,17 +15,17 @@ module.exports = function(app, model, db){
         var fs = api.Delete(id);
         res.send(fs);
     })
-    app.post("/api/assignment/user/:userId/form", function(req, res){
+    app.post("/api/assignment/user/:userId/form", function(req, res, next){
         var id = req.params.userId;
         var form = req.body;
         form.userId = id;
         var f = api.Create(form);
-        res.json(f);
+        res.send(f);
     })
     app.put("/api/assignment/form/:formId", function(req, res){
         var id = req.params.formId;
         var body = req.body;
-        var flag = api.Update(id, body);
-        res.json(flag);
+        var f = api.Update(id, body);
+        res.json(f);
     })
 }

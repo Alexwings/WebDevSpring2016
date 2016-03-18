@@ -15,8 +15,7 @@
         return service;
         //implementation of all event handler
         function createFormForUser(userId, form){
-            return $http.post("/api/assignment/user/" + userId + "/form", form)
-                .then(renderSuccess, renderError);
+            return $http.post("/api/assignment/user/" + userId + "/form", form);
         };
         function findAllFormsForUser(userId){
             return $http.get("/api/assignment/user/" + userId + "/form")

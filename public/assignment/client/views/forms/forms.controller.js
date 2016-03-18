@@ -15,11 +15,13 @@
         $scope.selectForm = selectForm;
         function addForm(form){
             FormService.createFormForUser(curUser._id, form)
-                .then(received, rejected);
+                .then(function(){
+                    FormService.findAllFormsForUser(curUser._id).then(received, rejected);
+                });
         }
         function updateForm(form){
             FormService.updateFormById(form._id, form)
-                .then(function(){
+                .then(function(data){
                     FormService.findAllFormsForUser(curUser._id).then(received, rejected);
                 });
         }
@@ -43,7 +45,7 @@
         function received(data){
             $scope.form_list = data;
         }
-        function rejected(data){
+        function rejected(){
             alert("Action failed!");
         }
     }

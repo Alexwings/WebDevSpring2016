@@ -8,7 +8,6 @@ module.exports = function(app, model, db){
     app.get("/api/assignment/form/:formId/field/:fieldId", function(req, res){
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
-        var form = api.FindById(formId);
         var field = api.findFieldById(formId, fieldId);
         res.send(field);
     })
