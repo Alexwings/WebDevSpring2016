@@ -18,21 +18,23 @@
                 </th>
             </tr>
             <tr>
-                <td>
-                    <input ng-model="selected.title" class="form-control" type="text" placeholder="{{show_form(selected.title)}}">
-                </td>
-                <td>
+                <th>
+                    <input ng-model="selected.title" class="form-control ng-pristine ng-untouched ng-valid"
+                           type="text" placeholder="title">
+                </th>
+                <th>
                     <a href="" ng-click="addForm(selected)" class="btn btn-default btn-md">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     </a>
-                    <a href="" ng-click="updateForm(selected)" class="btn btn-default btn-md">
+                    <a href="" ng-click="updateForm(selected)" ng-show="selected"
+                       class="btn btn-default btn-md">
                         <span class="glyphicon glyphicon-ok"></span>
                     </a>
-                </td>
+                </th>
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="f in form_collection" ng-class="{success: $index == selectedIndex}">
+            <tr ng-repeat="f in form_list" ng-class="{success: $index == selectedIndex}">
                 <td>{{f.title}}</td>
                 <td>
                     <a ng-click="deleteForm($index)" class="btn btn-danger btn-md" name="remove">

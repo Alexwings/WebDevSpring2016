@@ -10,22 +10,22 @@ module.exports = function(app, model, db){
         var form = api.FindById(id);
         res.json(form);
     })
-    app.delete("/api/assignment/form/:formId", function(req,res){
+    app.delete("/api/assignment/form/:formId", function(req, res, next){
         var id = req.params.formId;
         var fs = api.Delete(id);
-        res.json(fs);
+        res.send(fs);
     })
     app.post("/api/assignment/user/:userId/form", function(req, res){
         var id = req.params.userId;
         var form = req.body;
         form.userId = id;
-        var fs = api.Create(form);
-        res.json(fs);
+        var f = api.Create(form);
+        res.json(f);
     })
     app.put("/api/assignment/form/:formId", function(req, res){
         var id = req.params.formId;
         var body = req.body;
-        var fs = api.Update(id, body);
-        res.json(fs);
+        var flag = api.Update(id, body);
+        res.json(flag);
     })
 }

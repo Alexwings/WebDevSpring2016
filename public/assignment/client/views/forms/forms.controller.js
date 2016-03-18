@@ -6,66 +6,45 @@
         .module("FormBuilderApp")
         .controller("FormController", FormController);
     function FormController($scope, $location, FormService, UserService){
-        var formsOfUser;
         var curUser = UserService.getCurrentUser();
-        var findAllFormCallback = function(forms){
-            formsOfUser = forms;
-        }
-        FormService.findAllFormsForUser(curUser._id,findAllFormCallback);
-        $scope.show_form = show_form;
+        FormService.findAllFormsForUser(curUser._id).then(received, rejected);
+        $scope.form_list = [];
         $scope.addForm = addForm;
         $scope.updateForm = updateForm;
         $scope.deleteForm = deleteForm;
         $scope.selectForm = selectForm;
-        $scope.form_collection = formsOfUser;
-        function show_form(title){
-            if(title){
-                return title;
-            }else return "no form selected"
-        }
         function addForm(form){
-            var userId = curUser._id;
-            var callback = callback;
-            var formExist = false;
-            function callback(form){
-                formsOfUser.unshift(form);
-            }
-            for(var i = 0; i<formsOfUser.length; i++){
-                 f = formsOfUser[i];
-                if(f.title == form.title) {
-                    formExist = true;
-                    break;
-                }
-            }
-            if(!formExist){
-                FormService.createFormForUser(userId, form, callback);
-            }
+            FormService.createFormForUser(curUser._id, form)
+                .then(received, rejected);
         }
         function updateForm(form){
-            var formId = form._id;
-            var callback = callback;
-            FormService.updateFormById(formId,form,callback);
-            function callback(new_form){
-                $scope.selected = null;
-            }
+            FormService.updateFormById(form._id, form)
+                .then(function(){
+                    FormService.findAllFormsForUser(curUser._id).then(received, rejected);
+                });
         }
         function deleteForm(index){
-            var form = formsOfUser[index];
-            var callback = callback;
-            var success = false;
-            FormService.deleteFormById(form._id, callback);
-            function callback(fs){
-                $scope.selected = null;
-                success = true;
-            }
-            if (success){
-                formsOfUser.splice(index, 1);
-            }
+            var form = $scope.form_list[index];
+            var formId = form._id;
+            FormService.deleteFormById(formId)
+                .then(function(){
+                    FormService.findAllFormsForUser(curUser._id).then(received, rejected);
+                });
         }
         function selectForm(index){
             $scope.selectedIndex = index;
-            var form = formsOfUser[index];
-            $scope.selected = { _id:form._id, title:form.title, userId: form.userId }
+            $scope.selected ={
+                _id:$scope.form_list[index]._id,
+                title: $scope.form_list[index].title,
+                userId: $scope.form_list[index].userId,
+                field: $scope.form_list[index].field
+            };
+        }
+        function received(data){
+            $scope.form_list = data;
+        }
+        function rejected(data){
+            alert("Action failed!");
         }
     }
 })()

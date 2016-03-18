@@ -17,6 +17,8 @@ module.exports = function(app, db){
         'addField': addField,
         'updateField':updateField,
     }
+    return api;
+
     function findAll(){
         return forms;
     }
@@ -40,19 +42,20 @@ module.exports = function(app, db){
         return fs;
     }
     function create(form){
-        var f = {'_id': Uuid.raw(), 'userId': form.userId, 'fields': form.fields};
-        forms.push(f);
-        return forms;
+        if(!findByTitle(form.title)){
+            var f = {'_id': Uuid.raw(), 'userId': form.userId, 'fields': form.fields};
+            forms.push(f);
+            return f;
+        }
+        return null;
     }
     function remove(id){
         for(var i = 0; i < forms.length; i++){
             var formId = forms[i]._id;
             if(formId == id){
                 forms.splice(i, 1);
-                break;
             }
         }
-        return forms;
     }
     function update(id, form){
         var f = findById(id);
@@ -61,7 +64,6 @@ module.exports = function(app, db){
             f.userId = form.userId;
             f.fields = form.fields;
         }
-        return forms;
     }
     function findByTitle(title){
         for(var i = 0; i < forms.length; i++){

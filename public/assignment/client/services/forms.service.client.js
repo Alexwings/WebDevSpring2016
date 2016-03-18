@@ -5,59 +5,39 @@
     angular
         .module("FormBuilderApp")
         .factory("FormService", FormService);
-    function FormService(){
-        var forms = [
-            {"_id": "000", "title": "Contacts", "userId": 123},
-            {"_id": "010", "title": "ToDo",     "userId": 123},
-            {"_id": "020", "title": "CDs",      "userId": 234},
-        ];
-        var service={"createFormForUser": createFormForUser,
-        "findAllFormsForUser": findAllFormsForUser,
-        "deleteFormById": deleteFormById,
-        "updateFormById": updateFormById
+    function FormService($http, $q){
+        var service={
+            "createFormForUser": createFormForUser,
+            "findAllFormsForUser": findAllFormsForUser,
+            "deleteFormById": deleteFormById,
+            "updateFormById": updateFormById
         };
         return service;
         //implementation of all event handler
-        function createFormForUser(userId, form, callback){
-            form._id = produceId(new Date());
-            form.userId = userId;
-            forms.push(form);
-            callback(form);
+        function createFormForUser(userId, form){
+            return $http.post("/api/assignment/user/" + userId + "/form", form)
+                .then(renderSuccess, renderError);
         };
-        //helper function to produce unique ID
-        function produceId(date){
-            return date.getTime();
+        function findAllFormsForUser(userId){
+            return $http.get("/api/assignment/user/" + userId + "/form")
+                .then(renderSuccess, renderError);
+        };
+        function deleteFormById(formId){
+            return $http.delete("/api/assignment/form/"+formId);
+        };
+        function updateFormById(formId, newForm){
+            return $http.put("/api/assignment/form/"+formId, newForm);
         }
-        function findAllFormsForUser(userId, callback){
-            var result_forms = [];
-            for(var i = 0; i < forms.length; i++){
-                var form = forms[i];
-                if(form.userId == userId) {
-                    result_forms.push(form);
-                }
+        function renderSuccess(response){
+            var data = response.data;
+            if(data){
+                return data;
+            }else {
+                $q.reject(data);
             }
-            callback(result_forms);
-        };
-        function deleteFormById(formId, callback){
-            for(var i = 0; i< forms.length; i++){
-                if(forms[i]._id == formId){
-                    forms.splice(i,1);
-                    break;
-                }
-            }
-            callback(forms);
-        };
-        function updateFormById(formId, newForm, callback){
-            for(var i = 0; i < forms.length; i++){
-                var form = forms[i];
-                if(form._id == formId){
-                    form._id = formId;
-                    form.title = newForm.title;
-                    form.userId = newForm.userId;
-                    callback(form);
-                    break;
-                }
-            }
+        }
+        function renderError(response){
+            $q.reject(response.data);
         }
     }
 })()

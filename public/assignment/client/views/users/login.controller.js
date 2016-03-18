@@ -12,9 +12,13 @@
             UserService.findUserByCredentials(user.username, user.password).then(verified, rejected);
         }
         function verified(data){
-            $scope.exist = true;
-            UserService.setCurrentUser(data);
-            $location.path("/profile");
+            if(data.username && data.password){
+                $scope.exist = true;
+                UserService.setCurrentUser(data);
+                $location.path("/profile");
+            }else {
+                alert("Please fill in username and password!");
+            }
         }
         function rejected(error){
             $scope.exist = false;
