@@ -15,7 +15,7 @@
         }
         function registered(data){
             UserService.setCurrentUser(data);
-            $location.path("/profile");
+            $location.path("user/"+data._id+"/profile");
         }
         function rejected(error){
             alert("Cannot register! Try change another username!");

@@ -22,7 +22,7 @@
         function updateForm(form){
             FormService.updateFormById(form._id, form)
                 .then(function(data){
-                    FormService.findAllFormsForUser(curUser._id).then(received, rejected);
+                    $location.path("/user/"+curUser._id+"/form/"+form._id+"/field");
                 });
         }
         function deleteForm(index){

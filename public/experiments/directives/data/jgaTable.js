@@ -1,13 +1,13 @@
 // jgaTable.js
 (function(){
 
-    // declares directive in
+    // declares js in
     // custom module
     angular
         .module("jgaTable", [])
         .directive("jgaTable", jgaTable);
 
-    // implements directive
+    // implements js
     // templateUrl refers to template file
     function jgaTable() {
         return {

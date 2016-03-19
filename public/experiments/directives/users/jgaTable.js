@@ -1,13 +1,13 @@
 // jgaTable.js
 (function(){
 
-    // declares directive in
+    // declares js in
     // custom module
     angular
         .module("jgaTable", [])             // declares custom module
-        .directive("jgaTable", jgaTable);   // declares directive
+        .directive("jgaTable", jgaTable);   // declares js
 
-    // function jgaTable() implements the directive
+    // function jgaTable() implements the js
     function jgaTable() {
         return {
             // scope binds attribute variables

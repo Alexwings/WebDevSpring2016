@@ -29,8 +29,8 @@
             <label class="col-sm-1 col-md-1 control-label">Roles: </label>
             <div class="col-sm-8 col-sm-offset-1 col-md-9 col-md-offset-1 checkbox">
                 <span>  Current role: <strong>{{currentUser.roles.toString()}}</strong></span>
-                <label><input ng-model="user.student" type="checkbox" >student</label>
-                <label><input ng-model="user.faculty" type="checkbox" class="form-inline">faculty</label>
+                <label><input ng-model="user.student" type="checkbox" ng-checked="user.roles.indexOf('student') != -1">student</label>
+                <label><input ng-model="user.faculty" type="checkbox" class="form-inline" ng-checked="user.roles.indexOf('faculty') != -1">faculty</label>
             </div>
         </div>
             <button ng-click="update(user)" class="btn btn-primary col-xs-12 col-sm-10 col-md-9 col-md-offset-2 col-lg-9 col-lg-offset-2">Update</button>

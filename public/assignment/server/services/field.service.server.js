@@ -11,11 +11,15 @@ module.exports = function(app, model, db){
         var field = api.findFieldById(formId, fieldId);
         res.send(field);
     })
+    app.get("/api/assignment/form/template", function(req, res){
+        var temp = api.fieldTemplate();
+        res.send(temp);
+    })
     app.delete("/api/assignment/form/:formId/field/:fieldId", function(req, res){
         var fId = req.params.formId;
         var fieId = req.params.fieldId;
-        var form = api.removeField(fId, fieId);
-        res.send(form);
+        var fs = api.removeField(fId, fieId);
+        res.send(fs);
     })
     app.post("/api/assignment/form/:formId/field", function(req,res){
         var formId = req.params.formId;

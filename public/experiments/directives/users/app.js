@@ -4,9 +4,9 @@
     // declare DirectiveUserExperiment module
     angular
         .module("DirectiveUserExperiment", [
-            "escapeHtml",       // depends on escapeHtml directive
-            "getServerFile",    // depends on getServerFile directive
-            "jgaTable"          // depends on jgaTable directive
+            "escapeHtml",       // depends on escapeHtml js
+            "getServerFile",    // depends on getServerFile js
+            "jgaTable"          // depends on jgaTable js
         ])
         .controller("DataController", dataController);
 

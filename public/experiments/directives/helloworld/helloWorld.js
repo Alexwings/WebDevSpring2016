@@ -1,13 +1,13 @@
 // helloWorld.js
 (function(){
 
-    // add a directive called hello-world
+    // add a js called hello-world
     // to a module called HelloWorldDirective
     angular
         .module("HelloWorldDirective")
         .directive("helloWorld", HelloWorld);
 
-    // implement the directive in the following function
+    // implement the js in the following function
     function HelloWorld() {
 
         // configure the template attribute

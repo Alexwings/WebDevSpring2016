@@ -8,6 +8,7 @@
             'findUserByUsername':findUserByUsername,
             'findAllUsers': findAllUsers,
             'createUser': createUser,
+            'findUserById': findUserById,
             'deleteUserById': deleteUserById,
             'updateUser': updateUser,
             'setCurrentUser': setCurrentUser,
@@ -25,6 +26,11 @@
 
         function findAllUsers() {
             return $http.get("/api/assignment/user")
+                .then(renderSuccess, renderError);
+        }
+
+        function findUserById(id){
+            return $http.get("/api/assignment/user/"+id)
                 .then(renderSuccess, renderError);
         }
 

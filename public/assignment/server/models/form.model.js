@@ -1,9 +1,10 @@
 /**
  * Created by Alex on 3/14/2016.
  */
-var forms = require("./form.mock.json");
-var uuid = require('node-uuid');
 module.exports = function(app, db){
+    var forms = require("./form.mock.json");
+    var template = require("./field.template.json");
+    var uuid = require('node-uuid');
     var api = {
         'FindAll': findAll,
         'FindById': findById,
@@ -16,11 +17,15 @@ module.exports = function(app, db){
         'removeField': removeField,
         'addField': addField,
         'updateField':updateField,
+        'fieldTemplate':fieldTempalte
     }
     return api;
 
     function findAll(){
         return forms;
+    }
+    function fieldTempalte(){
+        return template;
     }
     function findById(id){
         for(var i = 0; i < forms.length; i++){
@@ -60,7 +65,6 @@ module.exports = function(app, db){
         if(f){
             f.title = form.title;
             f.userId = form.userId;
-            f.fields = form.fields;
         }
     }
     function findByTitle(title){
@@ -93,18 +97,19 @@ module.exports = function(app, db){
                 }
             }
         }
-        return form;
+        return form.fields;
     }
     function addField(formId, field){
         var form = findById(formId);
-        var f = {"_id": Uuid.raw()};
+        var f = {_id:uuid.v1()};
         for(key in field){
             if(!f.key){
                 f.key = field.key;
             }
         }
+        f._id = uuid.v1();
         form.fields.push(f);
-        return form;
+        return form.fields;
     }
     function updateField(formId, fieldId, newfield){
         var field = findField(formId, fieldId);
