@@ -50,32 +50,27 @@
 </nav>
 <!-- Search Bar -->
 <div class="container-fluid">
-    <div class="container search">
         <div class="row">
-            <form class="navbar-form navbar-right">
-                <div class="input-group">
-                    <input type="text" class="form-control top-search-input" placeholder="Search" aria-label="...">
-                    <div class="input-group-btn">
+                <form class="col-md-5 col-lg-5 col-md-offset-7 col-lg-offset-7 search">
+                    <div class="input-group top-search-group">
+                        <input type="text" class="form-control top-search-input" placeholder="Search">
+                        <select class="form-control top-search-input"><span class="caret"></span>
+                            <option selected>Categories</option>
+                            <option>Title</option>
+                            <option>Year</option>
+                            <option>Movie/TV</option>
+                        </select>
+                        <span class="input-group-btn">
                         <button type="button" class="btn btn-default">
                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                         </button>
-                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                                role="button"
-                                aria-haspopup="true"
-                                aria-expanded="false">search by<span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                            <li><a href="">title</a></li>
-                            <li><a href="">year</a></li>
-                            <li><a href="">movie/tv</a></li>
-                        </ul>
+                    </span>
                     </div>
-                </div>
-            </form>
+                </form>
         </div>
-    </div>
 
 <!-- Page Content -->
-    <div class="container search-content">
+    <div class="container page-content">
         <div class="row">
             <div class="col-sm-6 col-md-4">
                 <div class="thumbnails">

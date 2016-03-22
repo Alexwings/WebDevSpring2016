@@ -34,14 +34,22 @@ body {
 .register-group>h1 {
     text-align: left;
 }
-.container.search {
+.search {
     position: fixed;
     z-index: 3 !important;
 }
-.top-search-input {
-    height: 33px !important;
+.top-search-group .form-control{
+    width: 50%;
 }
-.container.search-content {
-    padding-top: 100px;
+.page-content {
+    padding-top: 60px;
     color: #eee;
+}
+.users-main {
+    padding-top: 30px;
+    color: #eee;
+}
+.detial {
+    padding-top: 60px;
+    color: #31b0d5;
 }
