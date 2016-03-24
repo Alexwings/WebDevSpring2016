@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html class="full" lang="en" ng-app="OnlineMovieApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Movie Info</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link href="css/the-big-picture.css" rel="stylesheet">
+
+</head>
+
+<body ng-controller="MainController">
+    <div ng-include="'views/header/header.view.html'"></div>
+    <!--Container for dynamic loaded views-->
+    <div class="container-fluid">
+        <div ng-view></div>
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <!-- AngularJS 1 -->
+    <script src="https://code.angularjs.org/1.5.0/angular.js"></script>
+    <!-- AngularJS Routing -->
+    <script src="https://code.angularjs.org/1.5.0/angular-route.js"></script>
+
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+
+    <!--contorllers-->
+    <script src="views/main/main.controller.js"></script>
+    <script src="views/header/header.controller.js"></script>
+    <script src="views/home/home.controller.js"></script>
+    <script src="views/movie/detial.controller.js"></script>
+
+    <!--services-->
+    <script src="services/movie.service.client.js"></script>
+    <script src="services/user.service.client.js"></script>
+    <script src="services/post.service.client.js"></script>
+</body>
+
+</html>
