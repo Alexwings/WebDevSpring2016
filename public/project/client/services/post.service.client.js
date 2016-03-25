@@ -14,24 +14,18 @@
             deletePost: deletePost
         }
         function create(post){
-            console.log("Create:");
-            console.log(post);
             return $http.post("/api/project/post", post);
         }
         function findById(id){
-            console.log(id);
             return $http.get("/api/project/post/"+id)
         }
         function findByTitle(title){
-            console.log(title);
             return $http.get("/api/project/post?Title="+title)
         }
         function update(post){
-            console.log(post);
             return $http.put("/api/project/post",post)
         }
         function deletePost(id){
-            console.log("delete: "+id);
             return $http.delete("/api/project/post/"+id)
         }
     }

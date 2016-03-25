@@ -9,6 +9,7 @@
         $scope.movies = [];
         $scope.message = false;
         $scope.toDetials = toDetials;
+        console.log($routeParams);
         var title = $routeParams.title;
         var type = $routeParams.Type;
         //PostService.findMoviesByTitle(title, type).then(renderSuccess, renderError);
@@ -18,14 +19,15 @@
         }
         function renderSuccess(response){
             if(response.data){
+                console.log(response.data);
                 $scope.movies = response.data;
             }
         }
         function renderMovie(response){
-            if(response.data){
-                $scope.movies = $scope.movies.concat(response.data);
-            }else {
+            if(response.data.Response == "False"){
                 $scope.message = true;
+            }else{
+                $scope.movies = response.data;
             }
         }
         function renderError(response){

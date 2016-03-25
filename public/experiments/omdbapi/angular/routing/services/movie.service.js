@@ -20,12 +20,17 @@
                 .success(callback);
         }
 
-        function findMoviesByTitle(title, callback) {
+        function findMoviesByTitle(title) {
             var url = SEARCH_URL
                 .replace("TITLE", title)
                 .replace("PAGE", 1);
-            $http.get(url)
-                .success(callback);
+            return $http.get(url).then(Success, Error);
+        }
+        function Success(response){
+            return response;
+        }
+        function Error(response){
+            return response;
         }
     }
 })();

@@ -14,7 +14,7 @@
         }
         function search(req){
             console.log(req);
-            $location.path("/result/"+req.name+"?Type="+req.type);
+            $location.path("/result/"+req.name+"/"+req.type);
         }
     }
 })()

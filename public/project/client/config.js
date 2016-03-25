@@ -26,7 +26,7 @@
                     templateUrl: "views/movie/result.view.html",
                     controller: "ResultController"
                 })
-                .when("/detials/:title",{
+                .when("/detials/:title?/:type",{
                     templateUrl: "views/movie/detial.view.html",
                     //controller: "DetialController"
                 })

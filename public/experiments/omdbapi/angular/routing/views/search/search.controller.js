@@ -1,5 +1,5 @@
 (function(){
-    var SEARCH_URL = "http://www.omdbapi.com/?s=TITLE&page=PAGE&type=movie";
+    var SEARCH_URL = "http://www.omdbapi.com/?s=TITLE&Type=movie";
 
     angular
         .module("OmdbApi")
@@ -18,7 +18,11 @@
         init();
 
         function fetchMovie(movieTitle) {
-            MovieService.findMoviesByTitle(movieTitle, renderMovies)
+            MovieService.findMoviesByTitle(movieTitle).then(function(response){
+                $scope.data = response;
+            }, function(response){
+                console.log(response.Error);
+            });
         }
 
         function renderMovies(response) {
