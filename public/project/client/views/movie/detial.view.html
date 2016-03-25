@@ -3,14 +3,16 @@
         <!--The movie poster-->
         <div class="container">
             <div class="col-lg-5 col-md-5">
-                <img src="../../img/poster.jpg" height="400" width="280">
+                <img ng-src="{{model.poster}}" height="400" width="280">
             </div>
             <!--The movie information-->
             <div class="col-lg-4 col-md-4">
-                <h2>Gradians of Galaxy</h2>
-                <h3>Director: Racoon</h3>
-                <h3>Actors: Grut, Start Lord</h3>
-                <p>Discription: blah, blah,blah,blah,blah,blah,blah,blah,blah,blah,blah,</p>
+                <h2>{{model.title}}</h2>
+                <h4>Director: {{model.Director}}</h4>
+                <h4>Actors: {{model.Actors}}</h4>
+                <h4>Language: {{model.Language}}</h4>
+                <h4>Awards: {{model.Awards}}</h4>
+                <p>Discription: {{model.Plot}}</p>
                 <!--Put Rating graphic here-->
             </div>
         </div>

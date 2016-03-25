@@ -22,6 +22,14 @@
                     templateUrl: "views/users/profile.view.html",
                     //controller: "ProfileController"
                 })
+                .when("/result/:title",{
+                    templateUrl: "views/movie/result.view.html",
+                    controller: "ResultController"
+                })
+                .when("/detials/:title",{
+                    templateUrl: "views/movie/detial.view.html",
+                    //controller: "DetialController"
+                })
                 .otherwise({
                     redirectTo:"/home"
                 })

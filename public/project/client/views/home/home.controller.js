@@ -13,7 +13,8 @@
             $scope.req.type = type;
         }
         function search(req){
-            $location.path("/result?title="+req.title+"&type="+req.type);
+            console.log(req);
+            $location.path("/result/"+req.name+"?Type="+req.type);
         }
     }
 })()
