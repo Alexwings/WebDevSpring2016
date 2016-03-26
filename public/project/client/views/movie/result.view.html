@@ -1,13 +1,15 @@
 <!-- Page Content -->
 <div class="row page-content">
+    <h3 ng-show="message">Result Not Found!</h3>
     <div class="col-lg-9 col-md-9">
-        <h3 ng-show="message">Result Not Found!</h3>
-        <div class="thumbnails col-lg-4 col-md-4" ng-repeat="movie in movies">
-            <a href="" ng-click="toDetials(movie)"><img ng-src="{{movie.Poster}}"></a>
-            <div class="caption">
-                <h3>{{movie.Title}}</h3>
-                <h4>{{movie.Director}}</h4>
-                <p>{{movie.Plot}}</p>
+        <div ng-repeat="movie in movies">
+            <div class="thumbnails col-lg-4 col-md-4">
+                <a href="" ng-click="toDetials(movie)"><img ng-src="{{movie.Poster}}" height="300", width="253"></a>
+                <div class="caption">
+                    <h3>{{movie.Title}}</h3>
+                    <h4>{{movie.Director}}</h4>
+                    <p>{{movie.Plot}}</p>
+                </div>
             </div>
         </div>
     </div>

@@ -8,14 +8,15 @@
     function RegisterController($scope, $location, UserService) {
         $scope.register = regist;
         function regist(user){
-            var new_user = {"username": user.username, "password": user.password, "roles":["general user"]};
+            var new_user = {"username": user.username, "password": user.password, "role":"general"};
             UserService.createUser(new_user).then(registered, rejected);
         }
-        function registered(data){
+        function registered(response){
+            var data = response.data;
             UserService.setCurrentUser(data);
-            $location.path("user/"+data._id+"/profile");
+            $location.path("/user/"+data._id);
         }
-        function rejected(error){
+        function rejected(response){
             alert("Cannot register! Try change another username!");
             console.log("Cannot create user!");
         }

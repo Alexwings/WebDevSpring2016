@@ -18,7 +18,7 @@
             })
             .when("/details/:imdb_id", {
                 templateUrl: "views/details/details.html",
-                controller: "DetailsController as model"
+                controller: "DetailsController as models"
             })
             .otherwise({
                 redirectTo: "/home"

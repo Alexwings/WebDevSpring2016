@@ -8,25 +8,25 @@
             $routeProvider
                 .when("/register", {
                     templateUrl:"views/users/register.view.html",
-                    //controller: "RegisterController"
+                    controller: "RegisterController"
                 })
                 .when("/login", {
                     templateUrl: "views/users/login.view.html",
-                    //controller: "LoginController"
+                    controller: "LoginController"
                 })
                 .when("/home", {
                     templateUrl: "views/home/home.view.html",
                     controller: "HomeController"
                 })
-                .when("/user/:id/profile", {
+                .when("/user/:userId", {
                     templateUrl: "views/users/profile.view.html",
-                    //controller: "ProfileController"
+                    controller: "ProfileController"
                 })
-                .when("/result/:title",{
+                .when("/result/:title/type/:type",{
                     templateUrl: "views/movie/result.view.html",
                     controller: "ResultController"
                 })
-                .when("/detials/:title?/:type",{
+                .when("/detials/:title/type/:type",{
                     templateUrl: "views/movie/detial.view.html",
                     //controller: "DetialController"
                 })

@@ -39,7 +39,7 @@
             CellService
                 .updateCell(sheetId, cellIndex, cell)
                 .then(function(sheet){
-                    //model.sheet = sheet;
+                    //models.sheet = sheet;
                 });
         }
 

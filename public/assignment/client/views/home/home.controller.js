@@ -4,7 +4,7 @@
 (function(){
     angular
         .module("FormBuilder")
-        .controller("homeController", homeController);
-    function($scope, $location,$rootScope){
+        .controller("homeController", HomeController);
+    function HomeController($scope, $location,$rootScope){
     }
 })()

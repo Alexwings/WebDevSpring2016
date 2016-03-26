@@ -12,6 +12,7 @@
         $scope.login = login;
         $scope.pro = pro;
         function logout(){
+            UserService.setCurrentUser(null);
             $location.path("/home");
         }
         function register(){
@@ -21,7 +22,7 @@
             $location.path("/login");
         }
         function pro(user){
-            $location.path("/user/"+user.id+"/profile");
+            $location.path("/user/"+user.id);
         }
     }
 })()

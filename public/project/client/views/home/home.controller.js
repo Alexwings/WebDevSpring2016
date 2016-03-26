@@ -13,8 +13,11 @@
             $scope.req.type = type;
         }
         function search(req){
-            console.log(req);
-            $location.path("/result/"+req.name+"/"+req.type);
+            if(req.type){
+                $location.path("/result/"+req.name+"/type/"+req.type);
+            }else {
+                $location.path("/result/"+req.name+"/type/"+"movie");
+            }
         }
     }
 })()

@@ -13,6 +13,7 @@
             updatePost: update,
             deletePost: deletePost
         }
+        return api;
         function create(post){
             return $http.post("/api/project/post", post);
         }
@@ -20,7 +21,7 @@
             return $http.get("/api/project/post/"+id)
         }
         function findByTitle(title){
-            return $http.get("/api/project/post?Title="+title)
+            return $http.get("/api/project/post/title/"+title)
         }
         function update(post){
             return $http.put("/api/project/post",post)

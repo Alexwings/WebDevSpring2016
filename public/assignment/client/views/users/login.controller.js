@@ -22,7 +22,7 @@
         }
         function rejected(error){
             $scope.exist = false;
-            console.log("Something wrong with user client service!");
+            console.log("Something wrong with user client services!");
         }
     }
 })()

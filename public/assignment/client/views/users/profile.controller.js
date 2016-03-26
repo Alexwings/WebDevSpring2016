@@ -17,7 +17,7 @@
                 UserService.setCurrentUser(data);
             }
             function rejected(error){
-                console.log("Something wrong with user client service!");
+                console.log("Something wrong with user client services!");
             }
         }
         function getRoles(std, fac, rols){

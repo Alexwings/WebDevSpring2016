@@ -16,10 +16,10 @@
         };
         return api;
         function findUserByCredentials(username, password) {
-            return $http.get("/api/projcet/user?username="+username+"&password="+password);
+            return $http.get("/api/project/user/username/"+username+"/password/"+password);
         }
         function findUserByUsername(username){
-            return $http.get("/api/project/user?username="+username);
+            return $http.get("/api/project/user/username/"+username);
         }
 
         function findAllUsers() {

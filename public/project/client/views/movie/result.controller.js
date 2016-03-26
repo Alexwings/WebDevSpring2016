@@ -5,14 +5,13 @@
     angular
         .module("OnlineMovieApp")
         .controller("ResultController", ResultController);
-    function ResultController($scope, $location, $routeParams, MovieService){
+    function ResultController($scope, $location, $routeParams, MovieService, PostService){
         $scope.movies = [];
         $scope.message = false;
         $scope.toDetials = toDetials;
-        console.log($routeParams);
         var title = $routeParams.title;
-        var type = $routeParams.Type;
-        //PostService.findMoviesByTitle(title, type).then(renderSuccess, renderError);
+        var type = $routeParams.type;
+        //PostService.findPostsByTitle(title).then(renderSuccess, renderError);
         MovieService.findMoviesByTitle(title, type).then(renderMovie, renderError);
         function toDetials(movie){
             $location.path("/detials/"+movie.title+"?imdbId="+movie.imdbID+"&type="+movie.type);
@@ -27,7 +26,7 @@
             if(response.data.Response == "False"){
                 $scope.message = true;
             }else{
-                $scope.movies = response.data;
+                $scope.movies = response.data.Search;
             }
         }
         function renderError(response){

@@ -6,12 +6,16 @@
         .module("OnlineMovieApp")
         .controller("ProfileController", ProfileController);
     function ProfileController($scope, $location, $routeParams, UserService){
-        $scope.user = null;
-        $scope.update = updateInfo;
-        UserService.findUserById($routeParams.id).then(foundUser, rejected);
-        if(!$scope.user.equals(UserService.getCurrentUser())){
-            $scope.user = UserService.getCurrentUser();
+        function init(){
+            $scope.user = {};
+            var userId = $routeParams.userId;
+            UserService.findUserById(userId).then(foundUser, rejected);
+           /* if(!$scope.user == (UserService.getCurrentUser())){
+                $scope.user = UserService.getCurrentUser();
+            }*/
         }
+        init();
+        $scope.update = updateInfo;
         function foundUser(response){
             if(response.data){
                 $scope.user = response.data;
@@ -29,11 +33,11 @@
             if(response.data){
                 UserService.setCurrentUser(data);
             }else {
-                console.log("Something wrong with user client service!");
+                console.log("Something wrong with user client services!");
             }
         }
         function rejected(error){
-            console.log("Something wrong with user client service!");
+            console.log("Something wrong with user client services!");
         }
     }
 })()
