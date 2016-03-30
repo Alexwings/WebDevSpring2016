@@ -2,13 +2,17 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var multer = require('multer');
-var upload = multer();
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(upload);
+app.use(multer());
+app.use(session({secret: "cs5610webdev"}));
+app.use(cookieParser());
+require("./public/assignment/server/app.js")(app);
 
 require("./public/project/server/app.js")(app);
-require("./public/assignment/server/app.js")(app);
 
 
 app.use(express.static(__dirname + '/public'));

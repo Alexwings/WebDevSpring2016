@@ -13,10 +13,15 @@
                 username: u.username, password: u.password, roles:getRoles(u.student, u.faculty, u.roles)};
             var userId = u._id;
             UserService.updateUser(userId, usr).then(updated, rejected);
-            function updated(data){
-                UserService.setCurrentUser(data);
+            function updated(response){
+                if(response.data){
+                    UserService.setCurrentUser(response.data);
+                }else{
+                    alert("Cannot find user!");
+                    $location.url("/home");
+                }
             }
-            function rejected(error){
+            function rejected(response){
                 console.log("Something wrong with user client services!");
             }
         }

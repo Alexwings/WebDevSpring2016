@@ -13,9 +13,13 @@
                 UserService.createUser(new_user).then(registered, rejected);
             }
         }
-        function registered(data){
-            UserService.setCurrentUser(data);
-            $location.path("user/"+data._id+"/profile");
+        function registered(response){
+            if(response.data){
+                UserService.setCurrentUser(response.data);
+                $location.path("/profile");
+            }else{
+                alert("Register failed, please try again!")
+            }
         }
         function rejected(error){
             alert("Cannot register! Try change another username!");

@@ -15,53 +15,37 @@
             'getCurrentUser': getCurrentUser
         };
         return service
-        function findUserByCredentials(username, password) {
-            return $http.get("/api/assignment/user?username="+username+"&password="+password)
-                .then(renderSuccess, renderError);
+        function findUserByCredentials(credentials) {
+            return $http.post("/api/assignment/login", credentials);
         }
         function findUserByUsername(username){
-            return $http.get("/api/assignment/user?username="+username)
-                .then(renderSuccess, renderError);
+            return $http.get("/api/assignment/user?username="+username);
         }
 
         function findAllUsers() {
-            return $http.get("/api/assignment/user")
-                .then(renderSuccess, renderError);
+            return $http.get("/api/assignment/user");
         }
 
         function findUserById(id){
-            return $http.get("/api/assignment/user/"+id)
-                .then(renderSuccess, renderError);
+            return $http.get("/api/assignment/user/"+id);
         }
 
         function createUser(usr) {
-            return $http.post("/api/assignment/user", usr)
-                .then(renderSuccess, renderError);
+            return $http.post("/api/assignment/user", usr);
         }
 
         function deleteUserById(usrId) {
-            return $http.delete("/api/assignment/user/"+usrId)
-                .then(renderSuccess, renderError);
+            return $http.delete("/api/assignment/user/"+usrId);
         }
 
         function updateUser(userId, user) {
-            return $http.put("/api/assignment/user/"+userId, user)
-                .then(renderSuccess, renderError);
+            return $http.put("/api/assignment/user/"+userId, user);
         }
         function setCurrentUser(user){
             $rootScope.currentUser = user;
         }
         function getCurrentUser(){
             return $rootScope.currentUser;
-        }
-        function renderSuccess(response){
-            if(response.data == null){
-                return $q.reject(response.data);
-            }
-            return response.data;
-        }
-        function renderError(response){
-            return $q.reject(response.data);
         }
     }
 })();
