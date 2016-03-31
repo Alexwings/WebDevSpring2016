@@ -10,11 +10,11 @@
         $scope.login = verifyUser;
         function verifyUser(user){
             var credentials = {username: user.username, password: user.password};
-            UserService.findUserByCredentials(credentials).then(verified, rejected);
+            UserService.login(credentials).then(verified, rejected);
         }
         function verified(reponse){
             var data = reponse.data;
-            if(data.username && data.password){
+            if(data){
                 $scope.exist = true;
                 UserService.setCurrentUser(data);
                 $location.path("/profile");

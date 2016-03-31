@@ -1,7 +1,7 @@
 /**
  * Created by Alex on 3/14/2016.
  */
-module.exports = function(app, db){
+module.exports = function(db, mongoose){
     var forms = require("./form.mock.json");
     var template = require("./field.template.json");
     var uuid = require('node-uuid');

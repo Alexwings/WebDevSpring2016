@@ -12,9 +12,12 @@
             'deleteUserById': deleteUserById,
             'updateUser': updateUser,
             'setCurrentUser': setCurrentUser,
-            'getCurrentUser': getCurrentUser
+            'getCurrentUser': getCurrentUser,
+            'login': login,
+            'logout': logout
         };
-        return service
+        return service;
+
         function findUserByCredentials(credentials) {
             return $http.post("/api/assignment/login", credentials);
         }
@@ -45,7 +48,13 @@
             $rootScope.currentUser = user;
         }
         function getCurrentUser(){
-            return $rootScope.currentUser;
+            return $http.get("/api/assignment/loggedin");
+        }
+        function login(credentials){
+            return $http.post("/api/assignment/login", credentials);
+        }
+        function logout(){
+            return $http.post("/api/assignment/logout");
         }
     }
 })();

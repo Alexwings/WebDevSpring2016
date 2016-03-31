@@ -4,36 +4,36 @@
         <div class="form-group">
             <label for="username" class="col-sm-1 col-md-1 control-label">Username:</label>
             <div class="col-sm-8 col-sm-offset-1 col-md-9 col-md-offset-1">
-                <p ng-model="user.username" class="form-control-static" id="username">{{user.username}}</p>
+                <p ng-model="currentUser.username" class="form-control-static" id="username">{{currentUser.username}}</p>
             </div>
         </div>
         <div class="form-group">
             <label for="password" class="col-sm-1 col-md-1 control-label">Password:</label>
             <div class="col-sm-8 col-sm-offset-1 col-md-9 col-md-offset-1">
-                <input ng-model="user.password" type="password" class="form-control" id="password">
+                <input ng-model="currentUser.password" type="password" class="form-control" id="password">
             </div>
         </div>
         <div class="form-group">
             <label for="firstname" class="col-sm-1 col-md-1 control-label">First Name:</label>
             <div class="col-sm-8 col-sm-offset-1 col-md-9 col-md-offset-1">
-                <input ng-model="user.firstName" type="text" class="form-control" id="firstname">
+                <input ng-model="currentUser.firstName" type="text" class="form-control" id="firstname">
             </div>
         </div>
         <div class="form-group">
             <label for="lastname" class="col-sm-1 col-md-1 control-label">Last Name:</label>
             <div class="col-sm-8 col-sm-offset-1 col-md-9 col-md-offset-1">
-                <input ng-model="user.lastName" type="text" class="form-control" id="lastname">
+                <input ng-model="currentUser.lastName" type="text" class="form-control" id="lastname">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-1 col-md-1 control-label">Roles: </label>
             <div class="col-sm-8 col-sm-offset-1 col-md-9 col-md-offset-1 checkbox">
                 <span>  Current role: <strong>{{currentUser.roles.toString()}}</strong></span>
-                <label><input ng-model="user.student" type="checkbox" ng-checked="user.roles.indexOf('student') != -1">student</label>
-                <label><input ng-model="user.faculty" type="checkbox" class="form-inline" ng-checked="user.roles.indexOf('faculty') != -1">faculty</label>
+                <label><input ng-model="student" type="checkbox" ng-checked="currentUser.roles.indexOf('student') != -1">student</label>
+                <label><input ng-model="faculty" type="checkbox" class="form-inline" ng-checked="currentUser.roles.indexOf('faculty') != -1">faculty</label>
             </div>
         </div>
-            <button ng-click="update(user)" class="btn btn-primary col-xs-12 col-sm-10 col-md-9 col-md-offset-2 col-lg-9 col-lg-offset-2">Update</button>
+            <button ng-click="update(currentUser)" class="btn btn-primary col-xs-12 col-sm-10 col-md-9 col-md-offset-2 col-lg-9 col-lg-offset-2">Update</button>
     </form>
 </div>
 

@@ -5,7 +5,10 @@
             $routeProvider
                 .when("/home", {
                     templateUrl:"views/home/home.view.html",
-                    //controller: "views/home/home.controller.js"
+                    controller: "HomeController",
+                    resolve: {
+                        getLogin: getLogin
+                    }
                 })
                 .when("/register", {
                     templateUrl: "views/users/register.view.html",
@@ -17,7 +20,10 @@
                 })
                 .when("/profile", {
                     templateUrl: "views/users/profile.view.html",
-                    controller: "ProfileController"
+                    controller: "ProfileController",
+                    resolve: {
+                        checkLogin: checkLogin
+                    }
                 })
                 .when("/admin", {
                     templateUrl: "views/admin/admin.view.html",
@@ -25,14 +31,44 @@
                 })
                 .when("/form", {
                     templateUrl: "views/forms/forms.view.html",
-                    controller: "FormController"
+                    controller: "FormController",
+                    resolve: {
+                        checkLogin: checkLogin
+                    }
                 })
                 .when("/user/:userId/form/:formId/field", {
                     templateUrl:"views/fields/fields.view.html",
-                    controller: "FieldController"
+                    controller: "FieldController",
+                    resolve: {
+                        checkLogin: checkLogin
+                    }
                 })
                 .otherwise({
                     redirectTo: "/home"
                 })
         });
+
+    function checkLogin(UserService, $q, $location){
+        var deferred = $q.defer();
+        UserService.getCurrentUser().then(function(response){
+            var currentUser = response.data;
+            if(currentUser){
+                UserService.setCurrentUser(currentUser);
+                deferred.resolve();
+            }else{
+                deferred.reject();
+                $location.url("/login");
+            }
+        });
+        return deferred.promise;
+    }
+    function getLogin(UserService, $q){
+        var defer = $q.defer();
+        UserService.getCurrentUser().then(function(response){
+            var currentUser = response.data;
+            UserService.setCurrentUser(currentUser);
+            defer.resolve();
+        });
+        return defer.promise;
+    }
 })();

@@ -6,31 +6,43 @@
         .module("FormBuilderApp")
         .controller("FormController", FormController);
     function FormController($scope, $location, FormService, UserService){
-        var curUser = UserService.getCurrentUser();
-        FormService.findAllFormsForUser(curUser._id).then(received, rejected);
-        $scope.form_list = [];
+        function init(){
+            UserService.getCurrentUser().then(function(response){
+                if(response.data){
+                    var id = response.data._id;
+                    $scope.curId = id;
+                    FormService.findAllFormsForUser(id).then(received, rejected);
+                }
+            }, function(response){
+                alert("No current user found, please login");
+                $location.url("/login");
+            });
+        }
+        init();
         $scope.addForm = addForm;
         $scope.updateForm = updateForm;
         $scope.deleteForm = deleteForm;
         $scope.selectForm = selectForm;
-        function addForm(form){
-            FormService.createFormForUser(curUser._id, form)
+
+
+        function addForm(id, form){
+            FormService.createFormForUser(id, form)
                 .then(function(){
-                    FormService.findAllFormsForUser(curUser._id).then(received, rejected);
+                    FormService.findAllFormsForUser(id).then(received, rejected);
                 });
         }
-        function updateForm(form){
+        function updateForm(id, form){
             FormService.updateFormById(form._id, form)
                 .then(function(data){
-                    $location.path("/user/"+curUser._id+"/form/"+form._id+"/field");
+                    $location.path("/user/"+id+"/form/"+form._id+"/field");
                 });
         }
-        function deleteForm(index){
+        function deleteForm(index, id){
             var form = $scope.form_list[index];
             var formId = form._id;
             FormService.deleteFormById(formId)
                 .then(function(){
-                    FormService.findAllFormsForUser(curUser._id).then(received, rejected);
+                    FormService.findAllFormsForUser(id).then(received, rejected);
                 });
         }
         function selectForm(index){
@@ -42,10 +54,10 @@
                 field: $scope.form_list[index].field
             };
         }
-        function received(data){
-            $scope.form_list = data;
+        function received(response){
+            $scope.form_list = response.data;
         }
-        function rejected(){
+        function rejected(response){
             alert("Action failed!");
         }
     }

@@ -6,11 +6,10 @@
         .module("FormBuilderApp")
         .controller("ProfileController", ProfileController);
     function ProfileController($scope, $location, UserService){
-        $scope.user = UserService.getCurrentUser();
         $scope.update = updateInfo;
         function updateInfo(u){
             var usr = {firstName:u.firstName, lastName: u.lastName,
-                username: u.username, password: u.password, roles:getRoles(u.student, u.faculty, u.roles)};
+                username: u.username, password: u.password, roles:getRoles()};
             var userId = u._id;
             UserService.updateUser(userId, usr).then(updated, rejected);
             function updated(response){
@@ -25,8 +24,10 @@
                 console.log("Something wrong with user client services!");
             }
         }
-        function getRoles(std, fac, rols){
+        function getRoles(rols){
             var roles= [];
+            var std = $scope.student;
+            var fac = $scope.faculty;
             function contains(rol, str){
                 for(var i = 0; i < rol.length; i++){
                     if (rol[i] == str) return true;
@@ -38,10 +39,10 @@
                     roles.push(rols[i]);
                 }
             };
-            if(std && !contains(roles, "student")) {
+            if(std) {
                 roles.push("student");
             }
-            if(fac && !contains(roles, "faculty")) {
+            if(fac) {
                 roles.push("faculty");
             }
             return roles;

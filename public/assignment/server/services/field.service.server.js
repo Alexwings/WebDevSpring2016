@@ -11,7 +11,7 @@ module.exports = function(app, model, db){
         var field = api.findFieldById(formId, fieldId);
         res.send(field);
     })
-    app.get("/api/assignment/form/template", function(req, res){
+    app.get("/api/assignment/field/template", function(req, res){
         var temp = api.fieldTemplate();
         res.send(temp);
     })

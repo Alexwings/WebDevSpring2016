@@ -3,8 +3,8 @@
  */
 (function(){
     angular
-        .module("FormBuilder")
-        .controller("homeController", HomeController);
-    function HomeController($scope, $location,$rootScope){
+        .module("FormBuilderApp")
+        .controller("HomeController", HomeController);
+    function HomeController($scope, $location){
     }
 })()

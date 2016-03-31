@@ -5,7 +5,7 @@
         <li role="presentation"><a>Fields</a></li>
     </ul>
     <div class="table-responsive">
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-hover" ng-model="curId">
             <thead>
             <tr>
                 <th>
@@ -23,10 +23,10 @@
                            type="text" placeholder="title">
                 </th>
                 <th>
-                    <a ng-click="addForm(selected)" class="btn btn-default btn-md">
+                    <a ng-click="addForm(curId, selected)" class="btn btn-default btn-md">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     </a>
-                    <a ng-click="updateForm(selected)" ng-show="selected"
+                    <a ng-click="updateForm(curId,selected)" ng-show="selected"
                        class="btn btn-default btn-md">
                         <span class="glyphicon glyphicon-ok"></span>
                     </a>
@@ -37,7 +37,7 @@
             <tr ng-repeat="f in form_list" ng-class="{success: $index == selectedIndex}">
                 <td>{{f.title}}</td>
                 <td>
-                    <a ng-click="deleteForm($index)" class="btn btn-danger btn-md" name="remove">
+                    <a ng-click="deleteForm($index, curId)" class="btn btn-danger btn-md" name="remove">
                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                     </a>
                     <a ng-click="selectForm($index)" class="btn btn-warning btn-md" name="select">
