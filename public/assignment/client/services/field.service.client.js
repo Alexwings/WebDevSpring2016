@@ -9,9 +9,12 @@
             'getFieldForForm': getFieldForForm,
             'deleteFieldFromForm': deleteFieldFromForm,
             'updateField': updateField,
-            'getTemplate': getTemplate
+            'sortFields': sortFields
         }
         return service;
+        function sortFields(formId, startIndex, endIndex){
+            return $http.put("/api/assignment/form/"+formId+"/field?startIndex="+startIndex+"&endIndex="+endIndex);
+        }
         function createFieldForForm(formId, field){
             return $http.post("/api/assignment/form/" + formId + "/field", field);
         };
@@ -26,9 +29,6 @@
         };
         function updateField(formId, fieldId, field){
             return $http.put("/api/assignment/form/"+formId+"/field/"+ fieldId, field);
-        }
-        function getTemplate(){
-            return $http.get("/api/assignment/field/template");
         }
 
     }
