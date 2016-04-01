@@ -9,12 +9,13 @@
         $scope.register = regist;
         function regist(user){
             if ($scope.verify == user.password){
-                var new_user = {"username": user.username, "password": user.password, "roles":[]};
+                var new_user = {"username": user.username, "password": user.password};
                 UserService.createUser(new_user).then(registered, rejected);
             }
         }
         function registered(response){
             if(response.data){
+                UserService.setCurrentUser(response.data);
                 $location.path("/profile");
             }else{
                 alert("Register failed, please try again!")
