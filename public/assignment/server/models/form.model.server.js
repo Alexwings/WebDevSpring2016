@@ -1,71 +1,41 @@
 /**
  * Created by Alex on 3/14/2016.
  */
-module.exports = function(db, mongoose){
-    var forms = require("./form.mock.json");
-    var uuid = require('node-uuid');
-
-
+var q = require('q');
+module.exports = function(mongoose){
+    var FormSchema = require('./form.schema.server.js')(mongoose);
+    var FormModel = mongoose.model('form', FormSchema);
     var api = {
-        'FindAll': findAll,
-        'FindById': findById,
-        'Create': create,
-        'Delete': remove,
-        'Update': update,
-        'findFormByTitle': findByTitle,
-        'findFormsByUserId': findByUserId,
+        createForm: createForm,
+        findFormsForUser: findFormsForUser,
+        findFormById: findFormById,
+        updateForm: updateForm,
+        deleteForm: deleteForm,
+        getMongooseModel: getMongooseModel
     }
     return api;
 
-    function findAll(){
-        return forms;
+    function getMongooseModel(){
+        return FormModel;
     }
-    function findById(id){
-        for(var i = 0; i < forms.length; i++){
-            var f = forms[i];
-            if(f._id == id){
-                return f;
-            }
-        }
-        return null;
+
+    function deleteForm(formId){
+
     }
-    function findByUserId(id){
-        var fs = [];
-        for(var i = 0; i < forms.length; i++){
-            var f = forms[i];
-            if(f.userId == id){
-                fs.push(f);
-            }
-        }
-        return fs;
+
+    function updateForm(formId, form){
+
     }
-    function create(form){
-        if(!findByTitle(form.title)){
-            var f = {'_id': uuid.v1(), 'title': form.title, 'userId': form.userId, 'fields': form.fields};
-            forms.push(f);
-        }
+
+    function findFormById(formId){
+
     }
-    function remove(id){
-        for(var i = 0; i < forms.length; i++){
-            var formId = forms[i]._id;
-            if(formId == id){
-                forms.splice(i, 1);
-            }
-        }
+
+    function findFormsForUser(userId){
+
     }
-    function update(id, form){
-        var f = findById(id);
-        if(f){
-            f.title = form.title;
-            f.userId = form.userId;
-        }
-    }
-    function findByTitle(title){
-        for(var i = 0; i < forms.length; i++){
-            if(forms[i].title == title){
-                return forms[i];
-            }
-        }
-        return null;
+
+    function createForm(form){
+
     }
 }

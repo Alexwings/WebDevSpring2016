@@ -1,6 +1,7 @@
 var q = require('q');
 
 module.exports = function(FormModel){
+    var Form = FormModel.getMongooseModel();
 
     var api = {
         'createField': createField,
