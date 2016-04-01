@@ -10,9 +10,9 @@ module.exports = function(app, db, mongoose){
     var form_service = require("./services/form.service.server.js");
     var field_service = require("./services/field.service.server.js");
 	
-	var userAPI = user_model(db, mongoose);
-	var formAPI = form_model(db, mongoose);
-	user_service(app, userAPI, db);
-	form_service(app, formAPI, db);
-    field_service(app, formAPI, db);
+	var userAPI = user_model(mongoose);
+	var formAPI = form_model(mongoose);
+	user_service(app, userAPI);
+	form_service(app, formAPI);
+    field_service(app, formAPI);
 }

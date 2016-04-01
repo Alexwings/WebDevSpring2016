@@ -14,7 +14,7 @@ module.exports = function(FormModel){
     return api;
 
     function sortField(formId, startIndex, endIndex){
-        return Form.findFormById(formId).then(function(form){
+        return Form.findById(formId).then(function(form){
             form.fields.splice(endIndex, 0, form.fields.splice(startIndex, 1)[0]);
             form.markModified('fields');
             form.save();
@@ -22,7 +22,7 @@ module.exports = function(FormModel){
     }
 
     function removeField(formId, fieldId){
-        return Form.findFormById(formId)
+        return Form.findById(formId)
             .then(
                 function(form){
                     form.fields.id(fieldId).remove();
@@ -31,7 +31,7 @@ module.exports = function(FormModel){
     }
 
     function updateField(formId, fieldObj){
-        return Form.findFormById(formId)
+        return Form.findById(formId)
             .then(
                 function(form){
                     var field = form.fields.id(fieldObj._id);
@@ -49,21 +49,18 @@ module.exports = function(FormModel){
     }
 
     function findField(formId, fieldId){
-        return Form.findFormById(formId)
+        return Form.findById(formId)
             .then(function(form){
                 return form.fields.id(fieldId);
         });
     }
 
     function findFieldsForForm(formId){
-        return Form.findFormById(formId)
-            .then(function(form){
-                return form.fields;
-            });
+        return Form.findById(formId).select("fields");
     }
 
     function createField(formId, field){
-        return Form.findFormById(formId)
+        return Form.findById(formId)
             .then(function(form){
                 form.fields.push(field);
                 return form.save();
