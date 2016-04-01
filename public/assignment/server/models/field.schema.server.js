@@ -8,7 +8,6 @@ module.exports = function(mongoose){
                 default: 'TEXT'},
             placeholder: String,
             options: [{label: String, value: String}]
-        }, {collection: 'form_field'}
-    );
+        });
     return fieldSchema;
 }
