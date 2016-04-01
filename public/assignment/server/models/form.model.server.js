@@ -3,8 +3,9 @@
  */
 module.exports = function(db, mongoose){
     var forms = require("./form.mock.json");
-    var template = require("./field.template.json");
     var uuid = require('node-uuid');
+
+
     var api = {
         'FindAll': findAll,
         'FindById': findById,
@@ -13,19 +14,11 @@ module.exports = function(db, mongoose){
         'Update': update,
         'findFormByTitle': findByTitle,
         'findFormsByUserId': findByUserId,
-        'findFieldById': findField,
-        'removeField': removeField,
-        'addField': addField,
-        'updateField':updateField,
-        'fieldTemplate':fieldTempalte
     }
     return api;
 
     function findAll(){
         return forms;
-    }
-    function fieldTempalte(){
-        return template;
     }
     function findById(id){
         for(var i = 0; i < forms.length; i++){
@@ -74,50 +67,5 @@ module.exports = function(db, mongoose){
             }
         }
         return null;
-    }
-    function findField(formId, fieldId){
-        var form = findById(formId);
-        if(form){
-            var fields = form.fields;
-            for(var i = 0; i < fields.length; i++){
-                if(fieldId == fields[i]._id){
-                    return fields[i];
-                }
-            }
-        }
-        return null;
-    }
-    function removeField(formId, fieldId){
-        var form = findById(formId);
-        if(form){
-            var fields = form.fields;
-            for(var i = 0; i < fields.length; i++){
-                if(fields[i]._id == fieldId){
-                    fields.splice(i, 1);
-                }
-            }
-        }
-        return form.fields;
-    }
-    function addField(formId, field){
-        var form = findById(formId);
-        var f = {_id:uuid.v1()};
-        for(key in field){
-            if(!f.key){
-                f.key = field.key;
-            }
-        }
-        f._id = uuid.v1();
-        form.fields.push(f);
-        return form.fields;
-    }
-    function updateField(formId, fieldId, newfield){
-        var field = findField(formId, fieldId);
-        if(field){
-            for(key in newfield){
-                field.key = newfield.key;
-            }
-        }
-        return field;
     }
 }
