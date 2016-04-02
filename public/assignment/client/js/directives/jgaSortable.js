@@ -15,10 +15,10 @@
                 stop: function(event, ui) {
                     end = ui.item.index();
                     scope.sortField(start, end);
-                    var temp = scope.fields[start];
+                    /*var temp = scope.fields[start];
                     scope.fields[start] = scope.fields[end];
                     scope.fields[end] = temp;
-                    scope.$apply();
+                    scope.$apply();*/
                 }
 
             });

@@ -30,17 +30,17 @@ module.exports = function(FormModel){
             });
     }
 
-    function updateField(formId, fieldObj){
+    function updateField(formId, fieldId, fieldObj){
         return Form.findById(formId)
             .then(
                 function(form){
-                    var field = form.fields.id(fieldObj._id);
+                    var field = form.fields.id(fieldId);
                     var type = field.type;
                     field.label = fieldObj.label;
-                    if(type in ['TEXT','TEXTAREA','EMAIL','PASSWORD']){
+                    if(type == 'TEXT'|| type == 'TEXTAREA' || type == 'EMAIL'|| type == 'PASSWORD'){
                         field.placeholder = fieldObj.placeholder;
                     }
-                    if(type in ['OPTIONS','CHECKBOXES','RADIOS']){
+                    if(type == 'OPTIONS'||type =='CHECKBOXES'||type =='RADIOS'){
                         field.options = fieldObj.options;
                     }
                     return form.save();

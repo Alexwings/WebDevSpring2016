@@ -13,13 +13,17 @@
         $scope.addField = addField;
         $scope.removeField = deleteField;
         $scope.sendToPopUp = sendToPopUp;
+        $scope.sortField = sortField;
         function init(){
             formId = $routeParams.formId;
             userId = $routeParams.userId;
             FieldService.getFieldsForForm(formId)
                 .then(
                     function(res){
-                        $scope.fields = res.data;
+                        console.log(res.data);
+                        if(res.data.length != 0){
+                            $scope.fields = res.data;
+                        }
                     },
                     function(res){
                         console.log(res.data);
@@ -28,6 +32,17 @@
                 );
         }
         init();
+        function sortField(startIndex, endIndex){
+            FieldService.sortFields(formId, startIndex, endIndex)
+                .then(
+                    function(res){
+                        init();
+                    },
+                    function(res){
+                        console.log(res.status);
+                    }
+                );
+        }
         function addField(model){
             var type = null;
             switch(model){
@@ -44,7 +59,7 @@
                     type = 'RADIOS';
                     break;
                 case('checkbox'):
-                    type = 'CHECKBOX';
+                    type = 'CHECKBOXES';
                     break;
                 case('date'):
                     type = 'DATE';
@@ -103,7 +118,24 @@
         }
         init();
         function updateField(model){
-            console.log('update field works');
+            var options = [];
+            if(model.choise){
+                var chs = model.choise.split('\n');
+                for(var i = 0; i < chs.length; i++){
+                    var pair = chs[i].split(':');
+                    options.push({label:pair[0], value:pair[1]});
+                }
+            }
+            var field = {label: model.label, type: model.type, placeholder: model.placeholder, options: options}
+            FieldService.updateField(formId, fieldId, field)
+                .then(
+                    function(res){
+                        $location.url('/user/'+userId+'/form/'+formId+'/field');
+                    },
+                    function(res){
+                        alert("Failed to update the field!");
+                    }
+                );
         }
         function cancel(){
             $location.url('/user/'+userId+'/form/'+formId+'/field');

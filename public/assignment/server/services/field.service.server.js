@@ -36,8 +36,8 @@ module.exports = function(app, FormModel){
         var formId = req.params.formId;
         FieldModel.findFieldsForForm(formId)
             .then(
-                function(fields){
-                    res.json(fields);
+                function(doc){
+                    res.json(doc.fields);
                 },
                 function(err){
                     res.status(400).send(err);
@@ -87,7 +87,7 @@ module.exports = function(app, FormModel){
         var formId = req.params.formId;
         var fieldId = req.params.fieldId
         var fieldObj = req.body;
-        FieldModel.findField(formId,fieldId)
+        FieldModel.updateField(formId,fieldId, fieldObj)
             .then(
                 function(form){
                     res.json(form);
