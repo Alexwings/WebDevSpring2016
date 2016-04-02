@@ -31,6 +31,10 @@
                     templateUrl:"views/fields/fields.view.html",
                     controller: "FieldController"
                 })
+                .when("/user/:userId/form/:formId/field/:fieldId", {
+                    templateUrl:"views/fields/field.edit.view.html",
+                    controller: "EditFieldController"
+                })
                 .otherwise({
                     redirectTo: "/home"
                 })

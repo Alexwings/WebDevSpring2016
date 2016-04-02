@@ -1,0 +1,22 @@
+<div class=" col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h3 class="col-lg-pull-5" ng-model="model.type">{{model.type}}</h3>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label for="label">Label:</label>
+            <input id="label" type="text" ng-model="model.label" class="form-control" placeholder="{{model.label}}">
+        </div>
+        <div class="form-group" ng-if="model.type == 'TEXT' || model.type == 'TEXTAREA'">
+            <label for="placeholder">Placeholder:</label>
+            <input id="placeholder" ng-model="model.placeholder" class="form-control"
+                   placeholder="{{model.placeholder}}">
+        </div>
+        <div class="form-group" ng-if="model.type == 'OPTIONS' || model.type == 'RADIOS' || model.type == 'CHECKBOX'">
+            <label for="option">Label:</label>
+            <textarea id="option" ng-model="model.choise" placeholder="Label:Value" class="form-control"></textarea>
+        </div>
+        <div class="btn-group pull-right">
+            <button type="button" ng-click="updateField(model)" class="btn btn-primary">Save changes</button>
+            <button type="button" ng-click="cancel()" class="btn btn-danger">Cancel</button>
+        </div>
+    </form>
+</div>
