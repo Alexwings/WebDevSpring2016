@@ -16,15 +16,7 @@ module.exports = function(app, FormModel){
             FieldModel.sortField(formId, startIndex, endIndex)
                 .then(
                     function(stat){
-                        return FormModel.findFieldsForForm(formId);
-                    },
-                    function(err){
-                        res.status(400).send(err);
-                    }
-                )
-                .then(
-                    function(fields){
-                        res.json(fields);
+                        res.send(200);
                     },
                     function(err){
                         res.status(400).send(err);

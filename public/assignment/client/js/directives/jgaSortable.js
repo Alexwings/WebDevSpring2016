@@ -14,16 +14,17 @@
                 },
                 stop: function(event, ui) {
                     end = ui.item.index();
-                    scope.sortField(start, end);
-                    /*var temp = scope.fields[start];
-                    scope.fields[start] = scope.fields[end];
-                    scope.fields[end] = temp;
-                    scope.$apply();*/
+
+                    scope.jgaSortableCallback({start:start, end:end});
+
                 }
 
             });
         }
         return {
+            scope:{
+                jgaSortableCallback: '&'
+            },
             link: link
         }
     }
