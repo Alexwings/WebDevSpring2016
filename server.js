@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var multer = require('multer');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
+var passport = require('passport');
 var mongoose = require('mongoose');
 var connection_url = 'mongodb://localhost/form_builder_db';
 
@@ -20,8 +21,10 @@ var db = mongoose.connect(connection_url);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer());
-app.use(session({secret: "cs5610webdev"}));
 app.use(cookieParser());
+app.use(session({secret: "cs5610webdev"}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 require("./public/assignment/server/app.js")(app, db, mongoose);
 
