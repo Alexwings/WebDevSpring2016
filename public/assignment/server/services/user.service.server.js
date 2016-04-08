@@ -6,6 +6,7 @@ module.exports = function(app, model, db){
     app.post("/api/assignment/user", register);
     app.get("/api/assignment/user", findUser);
     app.get("/api/assignment/user/:id", findUserById);
+    app.get("/api/assignment/loggedin", Loggedin);
     app.put("/api/assignment/user/:id", updateUser);
     app.delete("/api/assignment/user/:id", deleteUser);
     //app.post("/api/assignment/logout", Logout);
@@ -41,6 +42,10 @@ module.exports = function(app, model, db){
                     done(null, err);
                 }
             );
+    }
+
+    function Loggedin(req, res){
+        res.send(req.isAuthenticated() ? '1' :'0');
     }
 
     function Login(req, res){

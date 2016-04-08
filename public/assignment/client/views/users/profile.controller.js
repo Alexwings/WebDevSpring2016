@@ -14,7 +14,6 @@
         init();
         $scope.update = updateInfo;
         function updateInfo(u){
-            u.roles = getArray($scope.roles);
             u.emails = getArray($scope.emails);
             u.phones = getArray($scope.phones);
             UserService.updateUser(u._id, u).then(updated, rejected);

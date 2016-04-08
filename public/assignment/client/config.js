@@ -5,7 +5,10 @@
             $routeProvider
                 .when("/home", {
                     templateUrl:"views/home/home.view.html",
-                    controller: "HomeController"
+                    controller: "HomeController",
+                    resolve: {
+                        loggedin: checkCurrentUser
+                    },
                 })
                 .when("/register", {
                     templateUrl: "views/users/register.view.html",
@@ -39,4 +42,15 @@
                     redirectTo: "/home"
                 })
         });
+    var checkCurrentUser = function($q, $timeout, $http,  $location, UserService){
+        var defer = $q.defer();
+        $http.get('/api/assignment/loggedin')
+            .then(function(stat){
+                if(stat !== '0'){
+                    console.log(stat);
+                }
+                defer.resolve();
+            });
+        return defer.promise;
+    };
 })();
