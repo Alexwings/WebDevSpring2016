@@ -4,7 +4,6 @@
         .factory("UserService", UserService);
     function UserService($rootScope, $http, $q) {
         var service = {
-            'findUserByCredentials': findUserByCredentials,
             'findUserByUsername':findUserByUsername,
             'findAllUsers': findAllUsers,
             'createUser': createUser,
@@ -12,13 +11,12 @@
             'deleteUserById': deleteUserById,
             'updateUser': updateUser,
             'setCurrentUser': setCurrentUser,
-            'getCurrentUser': getCurrentUser,
-            'login': login
+            //'getCurrentUser': getCurrentUser,
+            'login': login,
             //'logout': logout
         };
         return service;
-
-        function findUserByCredentials(credentials) {
+        function login(credentials) {
             return $http.post("/api/assignment/login", credentials);
         }
         function findUserByUsername(username){
@@ -47,13 +45,13 @@
         function setCurrentUser(user){
             $rootScope.currentUser = user;
         }
-        function getCurrentUser(){
+        /*function getCurrentUser(){
             return $rootScope.currentUser;
             //return $http.get("/api/assignment/loggedin");
         }
         function login(credentials){
             return $http.post("/api/assignment/login", credentials);
-        }
+        }*/
         //function logout(){
           //  return $http.post("/api/assignment/logout");
         //}

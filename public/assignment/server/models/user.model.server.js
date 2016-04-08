@@ -12,7 +12,6 @@ module.exports = function(mongoose) {
         'Delete': Delete,
         'Update': update,
     };
-
     return api;
     function findAll(){
         var defer = q.defer();
@@ -32,7 +31,6 @@ module.exports = function(mongoose) {
            if(err){
                defer.reject(err);
            } else {
-               console.log(doc)
                defer.resolve(doc);
            }
         });

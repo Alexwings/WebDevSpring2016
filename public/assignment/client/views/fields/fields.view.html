@@ -22,9 +22,9 @@
                                         ng-model="option"
                                         ng-options="op.label for op in field.options"></select>
                                 <label id="checkbox" ng-switch-when="CHECKBOXS" ng-repeat="op in field.options">
-                                    <input type="checkbox" class="form-control">op.label</label>
+                                    <input type="checkbox" class="form-control">{{op.label}}</label>
                                 <label id="radios" ng-switch-when="RADIOS" ng-repeat="op in field.options">
-                                    <input type="radio" name="simpleRadio">op.label</label>
+                                    <input type="radio" name="simpleRadio">{{op.label}}</label>
                                 </div>
                                 <div class="input-group-btn">
                                     <button id="fname-control"

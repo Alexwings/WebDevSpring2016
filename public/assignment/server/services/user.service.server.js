@@ -1,6 +1,8 @@
 module.exports = function(app, model, db){
+    var passport = require('passport')
+    var LocalStrategy = require('passport-local').Strategy;
     var api = model;
-    app.post("/api/assignment/login", Login);
+    app.post("/api/assignment/login", passport.authenticate('local'), Login);
     app.post("/api/assignment/user", register);
     app.get("/api/assignment/user", findUser);
     app.get("/api/assignment/user/:id", findUserById);
@@ -8,17 +10,42 @@ module.exports = function(app, model, db){
     app.delete("/api/assignment/user/:id", deleteUser);
     //app.post("/api/assignment/logout", Logout);
 
-    function Login(req, res){
-        var credentials = req.body;
-        api.findUserByCredentials(credentials)
+    passport.use(new LocalStrategy(local));
+    passport.serializeUser(serializeUser);
+    passport.deserializeUser(deserializeUser);
+
+    function local(username, password, done){
+        api.findUserByCredentials({username:username, password: password})
             .then(
-                function(doc){
-                    res.json(doc);
+                function(user){
+                    if(!user){return done(null, false);}
+                    return done(null, user);
                 },
                 function(err){
-                    res.status(400).send(err);
+                    if(err){return done(err); }
                 }
             );
+    }
+
+    function serializeUser(user, done){
+        done(null, user);
+    }
+
+    function deserializeUser(user, done){
+        api.FindById(user._id)
+            .then(
+                function(user){
+                    done(null, user);
+                },
+                function(err){
+                    done(null, err);
+                }
+            );
+    }
+
+    function Login(req, res){
+        var user = req.user;
+        res.json(user);
     }
 
 

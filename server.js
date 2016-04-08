@@ -21,8 +21,12 @@ var db = mongoose.connect(connection_url);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer());
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: true
+}));
 app.use(cookieParser());
-app.use(session({secret: "cs5610webdev"}));
 app.use(passport.initialize());
 app.use(passport.session());
 
