@@ -13,9 +13,14 @@
             'setCurrentUser': setCurrentUser,
             'getCurrentUser': getCurrentUser,
             'login': login,
-            'logout': logout
+            'logout': logout,
+            'register': register
         };
         return service;
+        function register(user){
+            return $http.post('/api/assignment/register', user);
+        }
+
         function logout(){
           return $http.post("/api/assignment/logout");
         }

@@ -10,6 +10,7 @@ module.exports = function(app, model, db){
     app.put("/api/assignment/user/:id", updateUser);
     app.delete("/api/assignment/user/:id", deleteUser);
     app.post("/api/assignment/logout", Logout);
+    app.post('/api/assignment/register', register);
 
     passport.use(new LocalStrategy(local));
     passport.serializeUser(serializeUser);
@@ -44,6 +45,36 @@ module.exports = function(app, model, db){
             );
     }
 
+    function register(req, res){
+        var user = req.body;
+        user.roles = ['student']
+        api.findUserByUsername(user.username)
+            .then(
+                function(doc){
+                    if(doc){
+                        res.send(null);
+                    }else{
+                       return api.Create(user);
+                    }
+                },
+                function(err){
+                    res.status(400).send(err);
+                })
+            .then(
+                function(doc){
+                    req.login(doc, function(err){
+                        if(err){
+                            res.status(400).send(err);
+                        }else{
+                            res.json(doc);
+                        }
+                    });
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
+    }
     function Logout(req,res){
         req.logOut();
         res.send(200);
@@ -55,20 +86,6 @@ module.exports = function(app, model, db){
     function Login(req, res){
         var user = req.user;
         res.json(user);
-    }
-
-
-    function register(req, res){
-        var user = req.body;
-        api.Create(user)
-            .then(
-                function(doc){
-                res.json(doc);
-                },
-                function(err){
-                res.status(400).send(err);
-                }
-            );
     }
 
     function findUser(req, res) {

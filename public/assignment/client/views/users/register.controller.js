@@ -10,7 +10,7 @@
         function regist(user){
             if ($scope.verify == user.password){
                 var new_user = {"username": user.username, "password": user.password};
-                UserService.createUser(new_user).then(registered, rejected);
+                UserService.register(new_user).then(registered, rejected);
             }
         }
         function registered(response){
