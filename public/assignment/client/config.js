@@ -20,7 +20,10 @@
                 })
                 .when("/profile", {
                     templateUrl: "views/users/profile.view.html",
-                    controller: "ProfileController"
+                    controller: "ProfileController",
+                    resolve: {
+                        loggedin: checkLoggedin
+                    },
                 })
                 .when("/admin", {
                     templateUrl: "views/admin/admin.view.html",
@@ -42,12 +45,31 @@
                     redirectTo: "/home"
                 })
         });
+    var checkLoggedin = function($q, $timeout, $http, $location, $rootScope){
+        var defer = $q.defer();
+        $http.get('/api/assignment/loggedin')
+            .then(function(response){
+                $rootScope.errorMessage = null;
+                var user = response.data;
+                if(user !== '0'){
+                    $rootScope.currentUser = user;
+                    defer.resolve();
+                }else{
+                    $rootScope.errorMessage = "please login!"
+                    defer.reject();
+                    $location.url("/login");
+                }
+            });
+        return defer.promise;
+    }
     var checkCurrentUser = function($q, $timeout, $http,  $location, UserService){
         var defer = $q.defer();
         $http.get('/api/assignment/loggedin')
-            .then(function(stat){
-                if(stat !== '0'){
-                    console.log(stat);
+            .then(function(response){
+                var user = response.data;
+                if(user !== '0'){
+                    console.log(user);
+                    UserService.setCurrentUser(user);
                 }
                 defer.resolve();
             });

@@ -8,8 +8,16 @@
         $scope.logout = logout;
 		$scope.toProfile = toProfile;
         function logout(){
-            UserService.setCurrentUser(null);
-            $location.path("/home");
+            UserService.logout()
+                .then(
+                    function(response){
+                        UserService.setCurrentUser(null);
+                        $location.url('/home');
+                    },
+                    function(response){
+                        $scope.error = response.err;
+                    }
+                );
         }
 		function toProfile(user){
 			$location.path("/profile");

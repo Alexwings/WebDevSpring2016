@@ -9,7 +9,7 @@ module.exports = function(app, model, db){
     app.get("/api/assignment/loggedin", Loggedin);
     app.put("/api/assignment/user/:id", updateUser);
     app.delete("/api/assignment/user/:id", deleteUser);
-    //app.post("/api/assignment/logout", Logout);
+    app.post("/api/assignment/logout", Logout);
 
     passport.use(new LocalStrategy(local));
     passport.serializeUser(serializeUser);
@@ -44,8 +44,12 @@ module.exports = function(app, model, db){
             );
     }
 
+    function Logout(req,res){
+        req.logOut();
+        res.send(200);
+    }
     function Loggedin(req, res){
-        res.send(req.isAuthenticated() ? '1' :'0');
+        res.send(req.isAuthenticated() ? req.user:'0');
     }
 
     function Login(req, res){
