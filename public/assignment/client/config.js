@@ -27,7 +27,7 @@
                 })
                 .when("/admin", {
                     templateUrl: "views/admin/admin.view.html",
-                    //controller: "views/admin/admin.controller.js"
+                    controller: "AdminController"
                 })
                 .when("/form", {
                     templateUrl: "views/forms/forms.view.html",

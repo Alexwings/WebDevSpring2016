@@ -3,7 +3,8 @@ module.exports = function(app, model, db){
     var LocalStrategy = require('passport-local').Strategy;
     var api = model;
     app.post("/api/assignment/login", passport.authenticate('local'), Login);
-    app.post("/api/assignment/user", register);
+    app.post("/api/assignment/user", createUser);
+
     app.get("/api/assignment/user", findUser);
     app.get("/api/assignment/user/:id", findUserById);
     app.get("/api/assignment/loggedin", Loggedin);
@@ -131,7 +132,15 @@ module.exports = function(app, model, db){
         api.Update(userId, newuser)
             .then(
                 function(stat){
-                    res.send(200);
+                    return api.FindAll();
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(users){
+                    res.json(users);
                 },
                 function(err){
                     res.status(400).send(err);
@@ -144,11 +153,57 @@ module.exports = function(app, model, db){
         api.Delete(userId)
             .then(
                 function(doc){
-                    res.send(200);
+                    return api.FindAll();
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(users){
+                    res.json(users);
                 },
                 function(err){
                     res.status(400).send(err);
                 }
             );
+    }
+    function createUser(req, res){
+        var new_user = req.body;
+        if(!new_user.roles){
+            new_user.roles = ['student'];
+        }
+        if(typeof new_user.roles == 'String'){
+            new_user.roles = new_user.roles.split(',');
+        }
+        api.findUserByUsername(new_user.username)
+            .then(
+                function(doc){
+                    if(doc){
+                        return api.FindAll();
+                    }else{
+                        return api.Create(new_user)
+                            .then(
+                                function(user){
+                                    return api.FindAll();
+                                },
+                                function(err){
+                                    res.status(400).send(err);
+                                }
+                            );
+                    }
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(users){
+                    res.json(users);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            )
     }
 }

@@ -19,7 +19,6 @@ module.exports = function(mongoose) {
             if(err){
                 defer.reject(err);
             }else{
-                console.log(doc);
                 defer.resolve(doc);
             }
         })
