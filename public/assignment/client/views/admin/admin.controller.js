@@ -82,7 +82,19 @@
                 status.direction = !status.direction;
             }
             //TODO: add sort method;
-
+            var users = angular.copy($scope.users);
+            users.sort(
+                function(usr1, usr2){
+                    var attr = status.by;
+                    var com1 = usr1[attr].toLowerCase();
+                    var com2 = usr2[attr].toLowerCase();
+                    if(status.direction){
+                        return com1 < com2;
+                    }
+                    return com1 > com2;
+                }
+            );
+            $scope.users = users;
             $scope.sortAttr = status;
         }
     }
