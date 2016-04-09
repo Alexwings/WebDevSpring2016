@@ -129,6 +129,9 @@ module.exports = function(app, model, db){
     function updateUser(req, res){
         var userId = req.params.id;
         var newuser = req.body;
+        if(typeof newuser.roles == 'string'){
+            newuser.roles = newuser.roles.split(',');
+        }
         api.Update(userId, newuser)
             .then(
                 function(stat){

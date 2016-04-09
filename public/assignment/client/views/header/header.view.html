@@ -24,7 +24,10 @@
                 <li ng-show="currentUser">
                     <a  href="#/home" ng-click="logout()">Logout</a>
                 </li>
-                <li ng-show="currentUser.roles.indexOf('admin') >= 0" ng-class="{active:location.url() == '/admin'}">
+                <li class="hidden-sm hidden-md hidden-lg" ng-class="{active:location.url() == '/form'}">
+                    <a href="#/form">Admin</a>
+                </li>
+                <li class="hidden-sm hidden-md hidden-lg" ng-show="currentUser.roles.indexOf('admin') >= 0" ng-class="{active:location.url() == '/admin'}">
                     <a href="#/admin">Admin</a>
                 </li>
             </ul>
