@@ -27,7 +27,10 @@
                 })
                 .when("/admin", {
                     templateUrl: "views/admin/admin.view.html",
-                    controller: "AdminController"
+                    controller: "AdminController",
+                    resolve: {
+                        loggedin: checkAdmin
+                    }
                 })
                 .when("/form", {
                     templateUrl: "views/forms/forms.view.html",
@@ -45,6 +48,23 @@
                     redirectTo: "/home"
                 })
         });
+    var checkAdmin = function($q, $timeout, $http, $location, $rootScope){
+        var defer = $q.defer();
+        $http.get('/api/assignment/loggedin')
+            .then(function(response){
+                $rootScope.errorMessage = null;
+                var user = response.data;
+                if(user !== '0' && user.roles.indexOf('admin') != -1){
+                    $rootScope.currentUser = user;
+                    defer.resolve();
+                }else{
+                    $rootScope.errorMessage = 'You are not Admin!';
+                    defer.reject();
+                    $location.url('/home');
+                }
+            })
+        return defer.promise;
+    }
     var checkLoggedin = function($q, $timeout, $http, $location, $rootScope){
         var defer = $q.defer();
         $http.get('/api/assignment/loggedin')
@@ -55,7 +75,7 @@
                     $rootScope.currentUser = user;
                     defer.resolve();
                 }else{
-                    $rootScope.errorMessage = "please login!"
+                    $rootScope.errorMessage = "please login!";
                     defer.reject();
                     $location.url("/login");
                 }

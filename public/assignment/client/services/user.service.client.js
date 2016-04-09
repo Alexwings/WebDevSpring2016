@@ -4,19 +4,43 @@
         .factory("UserService", UserService);
     function UserService($rootScope, $http, $q) {
         var service = {
+            //General user
             'findUserByUsername':findUserByUsername,
-            'findAllUsers': findAllUsers,
-            'createUser': createUser,
             'findUserById': findUserById,
-            'deleteUserById': deleteUserById,
             'updateUser': updateUser,
             'setCurrentUser': setCurrentUser,
             'getCurrentUser': getCurrentUser,
             'login': login,
             'logout': logout,
-            'register': register
+            'register': register,
+            //Admin user
+            'findAllUsers': findAllUsers,
+            'createUser': createUser,
+            'updateUserForAdmin': updateUserForAdmin,
+            'deleteUserById': deleteUserById,
+            'findUserForAdmin': findUserForAdmin
         };
         return service;
+        function findUserForAdmin(id){
+            return $http.get("/api/assignment/admin/user/"+id);
+        }
+
+        function deleteUserById(usrId) {
+            return $http.delete("/api/assignment/admin/user/"+usrId);
+        }
+
+        function updateUserForAdmin(userId, user){
+            return $http.put("/api/assignment/admin/user/"+userId, user);
+        }
+
+        function createUser(usr) {
+            return $http.post("/api/assignment/admin/user", usr);
+        }
+
+        function findAllUsers() {
+            return $http.get("/api/assignment/admin/user");
+        }
+
         function register(user){
             return $http.post('/api/assignment/register', user);
         }
@@ -31,20 +55,8 @@
             return $http.get("/api/assignment/user?username="+username);
         }
 
-        function findAllUsers() {
-            return $http.get("/api/assignment/user");
-        }
-
         function findUserById(id){
             return $http.get("/api/assignment/user/"+id);
-        }
-
-        function createUser(usr) {
-            return $http.post("/api/assignment/user", usr);
-        }
-
-        function deleteUserById(usrId) {
-            return $http.delete("/api/assignment/user/"+usrId);
         }
 
         function updateUser(userId, user) {

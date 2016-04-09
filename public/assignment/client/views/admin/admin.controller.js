@@ -27,7 +27,7 @@
         }
         init();
         function updateUser(user){
-            UserService.updateUser(user._id, user)
+            UserService.updateUserForAdmin(user._id, user)
                 .then(
                     function(response){
                         $scope.users = response.data;

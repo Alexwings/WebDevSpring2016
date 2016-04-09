@@ -1,17 +1,22 @@
 module.exports = function(app, model, db){
-    var passport = require('passport')
+    var passport = require('passport');
     var LocalStrategy = require('passport-local').Strategy;
     var api = model;
+    var auth = authenticated;
+    var isAdmin = isAdmin;
     app.post("/api/assignment/login", passport.authenticate('local'), Login);
-    app.post("/api/assignment/user", createUser);
-
-    app.get("/api/assignment/user", findUser);
+    app.get("/api/assignment/user", auth, findUser);
     app.get("/api/assignment/user/:id", findUserById);
     app.get("/api/assignment/loggedin", Loggedin);
-    app.put("/api/assignment/user/:id", updateUser);
-    app.delete("/api/assignment/user/:id", deleteUser);
+    app.put("/api/assignment/user/:id", auth, updateUser);
     app.post("/api/assignment/logout", Logout);
     app.post('/api/assignment/register', register);
+
+    app.post("/api/assignment/admin/user", isAdmin, createUser);
+    app.get("/api/assignment/admin/user", isAdmin, findAllUser);
+    app.get("/api/assignment/admin/user/:id", isAdmin, findUserById);
+    app.put("/api/assignment/admin/user/:id", isAdmin, updateUser);
+    app.delete("/api/assignment/admin/user/:id", isAdmin, deleteUser);
 
     passport.use(new LocalStrategy(local));
     passport.serializeUser(serializeUser);
@@ -100,7 +105,10 @@ module.exports = function(app, model, db){
                         res.status(400).send(err);
                     }
                 );
-        } else {
+        }
+    }
+
+    function findAllUser(req, res){
             var users = api.FindAll()
                 .then(
                     function (doc) {
@@ -110,7 +118,6 @@ module.exports = function(app, model, db){
                         res.status(400).send(err);
                     }
                 );
-        }
     }
 
     function findUserById(req, res){
@@ -129,6 +136,7 @@ module.exports = function(app, model, db){
     function updateUser(req, res){
         var userId = req.params.id;
         var newuser = req.body;
+
         if(newuser.emails.length == 0){
             delete newuser.emails;
         }
@@ -165,23 +173,23 @@ module.exports = function(app, model, db){
 
     function deleteUser(req, res){
         var userId = req.params.id;
-        api.Delete(userId)
-            .then(
-                function(doc){
-                    return api.FindAll();
-                },
-                function(err){
-                    res.status(400).send(err);
-                }
-            )
-            .then(
-                function(users){
-                    res.json(users);
-                },
-                function(err){
-                    res.status(400).send(err);
-                }
-            );
+            api.Delete(userId)
+                .then(
+                    function(doc){
+                        return api.FindAll();
+                    },
+                    function(err){
+                        res.status(400).send(err);
+                    }
+                )
+                .then(
+                    function(users){
+                        res.json(users);
+                    },
+                    function(err){
+                        res.status(400).send(err);
+                    }
+                );
     }
     function createUser(req, res){
         var new_user = req.body;
@@ -219,6 +227,21 @@ module.exports = function(app, model, db){
                 function(err){
                     res.status(400).send(err);
                 }
-            )
+            );
+    };
+    function authenticated(req, res, next){
+        if(!req.isAuthenticated()){
+            res.send(401);
+        }else{
+            next();
+        }
+    }
+
+    function isAdmin(req, res, next){
+        if(req.isAuthenticated()){
+            return next();
+        }else{
+            res.send(403);
+        }
     }
 }
