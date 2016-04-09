@@ -14,22 +14,13 @@
         init();
         $scope.update = updateInfo;
         function updateInfo(u){
-            u.emails = getArray($scope.emails);
-            u.phones = getArray($scope.phones);
             UserService.updateUser(u._id, u).then(updated, rejected);
             function updated(response){
-                $location.url("/profile");
+                init();
             }
             function rejected(response){
                 alert("can't find user");
                 $location.url("/home");
-            }
-            function getArray(str){
-                if(!str){
-                    return [];
-                }else{
-                    return str.split(',');
-                }
             }
         }
     }

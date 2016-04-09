@@ -129,6 +129,18 @@ module.exports = function(app, model, db){
     function updateUser(req, res){
         var userId = req.params.id;
         var newuser = req.body;
+        if(newuser.emails.length == 0){
+            delete newuser.emails;
+        }
+        if(newuser.phones.length == 0){
+            delete newuser.phones;
+        }
+        if(typeof newuser.emails == 'string'){
+            newuser.emails = newuser.emails.split(',');
+        }
+        if(typeof newuser.phones == 'string'){
+            newuser.phones = newuser.phones.split(',');
+        }
         if(typeof newuser.roles == 'string'){
             newuser.roles = newuser.roles.split(',');
         }
