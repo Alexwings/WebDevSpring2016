@@ -5,8 +5,12 @@
     angular
         .module("OnlineMovieApp")
         .controller("LoginController", LoginController);
-    function LoginController($scope, $location, UserService){
-        $scope.login = verifyUser;
+    function LoginController($location, UserService){
+        model.login = verifyUser;
+        function init(){
+            UserService.setCurrentUser = null;
+        }
+        init();
         function verifyUser(user){
             UserService.findUserByCredentials(user.username, user.password).then(verified, rejected);
         }

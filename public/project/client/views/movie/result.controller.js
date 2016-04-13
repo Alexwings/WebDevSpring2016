@@ -14,7 +14,7 @@
         //PostService.findPostsByTitle(title).then(renderSuccess, renderError);
         MovieService.findMoviesByTitle(title, type).then(renderMovie, renderError);
         function toDetials(movie){
-            $location.path("/detials/"+movie.title+"?imdbId="+movie.imdbID+"&type="+movie.type);
+            $location.path("/detials/"+movie.title+'/type/'+movie.type);
         }
         function renderSuccess(response){
             if(response.data){

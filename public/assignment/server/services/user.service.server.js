@@ -83,6 +83,7 @@ module.exports = function(app, model, db){
     }
     function Logout(req,res){
         req.logOut();
+        req.session.destroy();
         res.send(200);
     }
     function Loggedin(req, res){

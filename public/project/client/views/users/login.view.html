@@ -5,13 +5,13 @@
                 <h1 class="form-control-static">Login</h1>
             </div>
             <div class="form-group">
-                <input id="login-username" ng-model="user.username" type="text" class="form-control" placeholder="username">
+                <input id="login-username" ng-model="model.user.username" type="text" class="form-control" placeholder="username">
             </div>
             <div class="form-group">
-                <input id="login-password" ng-model="user.password" type="password" class="form-control" placeholder="password">
+                <input id="login-password" ng-model="model.user.password" type="password" class="form-control" placeholder="password">
             </div>
             <div class="form-group">
-                <button ng-click="login(user)" class="btn btn-info">Login</button>
+                <button ng-click="model.login(user)" class="btn btn-info">Login</button>
             </div>
         </form>
     </div>

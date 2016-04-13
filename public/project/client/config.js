@@ -8,11 +8,13 @@
             $routeProvider
                 .when("/register", {
                     templateUrl:"views/users/register.view.html",
-                    controller: "RegisterController"
+                    controller: "RegisterController",
+                    controllerAs: 'model'
                 })
                 .when("/login", {
                     templateUrl: "views/users/login.view.html",
-                    controller: "LoginController"
+                    controller: "LoginController",
+                    controllerAs: 'model'
                 })
                 .when("/home", {
                     templateUrl: "views/home/home.view.html",
@@ -20,7 +22,8 @@
                 })
                 .when("/user/:userId", {
                     templateUrl: "views/users/profile.view.html",
-                    controller: "ProfileController"
+                    controller: "ProfileController",
+                    controllerAs: "model"
                 })
                 .when("/result/:title/type/:type",{
                     templateUrl: "views/movie/result.view.html",
@@ -29,6 +32,11 @@
                 .when("/detials/:title/type/:type",{
                     templateUrl: "views/movie/detial.view.html",
                     //controller: "DetialController"
+                })
+                .when("/admin", {
+                    templateUrl:"views/admin/admin.view.html",
+                    controller: "AdminController",
+                    controllerAs: "model"
                 })
                 .otherwise({
                     redirectTo:"/home"

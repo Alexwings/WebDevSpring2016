@@ -5,8 +5,8 @@
     angular
         .module("OnlineMovieApp")
         .controller("RegisterController", RegisterController);
-    function RegisterController($scope, $location, UserService) {
-        $scope.register = regist;
+    function RegisterController($location, UserService) {
+        model.register = regist;
         function regist(user){
             var new_user = {"username": user.username, "password": user.password, "role":"general"};
             UserService.createUser(new_user).then(registered, rejected);

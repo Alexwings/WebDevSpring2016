@@ -5,20 +5,20 @@
     angular
         .module("OnlineMovieApp")
         .controller("ProfileController", ProfileController);
-    function ProfileController($scope, $location, $routeParams, UserService){
+    function ProfileController($location, $routeParams, UserService){
         function init(){
-            $scope.user = {};
+            model.user = {};
             var userId = $routeParams.userId;
             UserService.findUserById(userId).then(foundUser, rejected);
-           /* if(!$scope.user == (UserService.getCurrentUser())){
-                $scope.user = UserService.getCurrentUser();
+           /* if(!model.user == (UserService.getCurrentUser())){
+                model.user = UserService.getCurrentUser();
             }*/
         }
         init();
-        $scope.update = updateInfo;
+        model.update = updateInfo;
         function foundUser(response){
             if(response.data){
-                $scope.user = response.data;
+                model.user = response.data;
             }else{
                 alert("No User Found!");
             }
