@@ -8,7 +8,13 @@ module.exports = function(app, API, db){
     //user login
     app.post('/api/project/login', passport.authenticate('project'), Login);
     app.post('/api/project/register', register);
+    app.post('/api/project/logout', Logout);
 
+    function Logout(req, res){
+        req.logout();
+        req.session.destroy();
+        res.send(200);
+    }
     function register(req, res){
         var new_user = req.body;
         api.findUserByUsername(new_user.username)

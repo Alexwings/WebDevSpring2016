@@ -1,5 +1,5 @@
 <!-- Navigation -->
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-controller="HeaderController">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-controller="HeaderController as model">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -15,16 +15,16 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li ng-hide="currentUser" ng-class="{active: location.url() == '/register'}">
-                    <a ng-click="register()" href="">Register</a>
+                    <a ng-click="model.register()" href="">Register</a>
                 </li>
                 <li ng-hide="currentUser" ng-class="{active: location.url() == '/login'}">
-                    <a ng-click="login()" href="">login</a>
+                    <a ng-click="model.login()" href="">login</a>
                 </li>
-                <li ng-show="currentUser" ng-class="{active: location.url() == '/user/:id/profile'}">
-                    <a ng-click="pro(currentUser)" href="">{{currentUser.username}}</a>
+                <li ng-show="currentUser" ng-class="{active: location.url() == '/profile'}">
+                    <a ng-click="model.pro(currentUser)" href="">{{currentUser.username}}</a>
                 </li>
                 <li ng-show="currentUser">
-                    <a ng-click="logout()" href="">Logout</a>
+                    <a ng-click="model.logout()" href="">Logout</a>
                 </li>
             </ul>
         </div>

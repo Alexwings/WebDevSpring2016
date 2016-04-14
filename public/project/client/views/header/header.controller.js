@@ -5,15 +5,26 @@
     angular
         .module("OnlineMovieApp")
         .controller("HeaderController", HeaderController);
-    function HeaderController($scope, $location, UserService){
-        $scope.location = $location;
-        $scope.logout = logout;
-        $scope.register = register;
-        $scope.login = login;
-        $scope.pro = pro;
+    function HeaderController($location, UserService){
+        var model = this;
+        model.location = $location;
+        model.logout = logout;
+        model.register = register;
+        model.login = login;
+        model.pro = pro;
         function logout(){
-            UserService.setCurrentUser(null);
-            $location.path("/home");
+            UserService.logout()
+                .then(
+                    function(stat){
+                        if(stat){
+                            UserService.setCurrentUser(null);
+                            $location.url("/home");
+                        };
+                    },
+                    function(err){
+                        model.error = err;
+                    }
+                )
         }
         function register(){
             $location.path("/register");
@@ -22,7 +33,7 @@
             $location.path("/login");
         }
         function pro(user){
-            $location.path("/user/"+user.id);
+            $location.path("/profile");
         }
     }
 })()

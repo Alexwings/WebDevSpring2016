@@ -13,7 +13,7 @@
             //for general
             'register': register,
             'login': loginUser,
-            //'logout': logoutUser,
+            'logout': logoutUser,
             'findUserByUsername':findUserByUsername,
             'findUserById': findUserById,
             'updateUser': updateUser,
@@ -30,6 +30,9 @@
             $rootScope.currentUser = user;
         }
         //for general
+        function logoutUser(){
+            return $http.post("/api/project/logout");
+        }
         function loginUser(username, password) {
             var credentials = {username: username, password: password};
             return $http.post("/api/project/login", credentials);
