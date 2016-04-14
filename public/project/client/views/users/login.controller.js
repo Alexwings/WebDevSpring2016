@@ -6,16 +6,18 @@
         .module("OnlineMovieApp")
         .controller("LoginController", LoginController);
     function LoginController($location, UserService){
+        var model = this
         model.login = verifyUser;
         function init(){
             UserService.setCurrentUser = null;
         }
         init();
         function verifyUser(user){
-            UserService.findUserByCredentials(user.username, user.password).then(verified, rejected);
+            UserService.login(user.username, user.password).then(verified, rejected);
         }
         function verified(response){
             if(response.data){
+                console.log(response.data);
                 UserService.setCurrentUser(response.data);
                 $location.path("/user/"+response.data._id);
             }else {

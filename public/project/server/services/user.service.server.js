@@ -1,40 +1,76 @@
 module.exports = function(app, API, db){
     var api = API;
-    app.get("/api/project/user/username/:username/password/:password", function (req, res){
-        var usrname = req.params.username;
-        var pwd = req.params.password;
-        var credentials = {username: usrname, password: pwd};
-        var usr = api.findUserByCredentials(credentials);
-        res.send(usr);
-        });
-    app.get("/api/project/user/username/:username", function(req, res){
-        var usrname = req.username;
-        var usr = api.findUserByUsername(req.query.username);
-        res.send(usr);
-    });
-    app.post("/api/project/user", function(req, res){
-        var user = req.body;
-        var usr = api.Create(user);
-        res.send(usr);
-    });
-    app.get("/api/project/user", function(req, res){
-        var users = api.FindAll();
-        res.send(users);
-    });
-    app.get("/api/project/user/:id", function(req, res){
-        var userId = req.params.id;
-        var user = api.FindById(userId);
-        res.send(user);
-    });
-    app.put("/api/project/user/:id", function(req, res){
-        var userId = req.params.id;
-        var newuser = req.body;
-        var user = api.Update(userId, newuser);
-        res.send(user);
-    });
-    app.delete("/api/project/user/:id", function(req, res){
-        var userId = req.params.id;
-        var users = api.Delete(userId);
-        res.send(users);
-    });
+    var passport = require('passport');
+    var localStrategy = require('passport-local').Strategy;
+    passport.use('project', new localStrategy(local));
+    passport.serializeUser(serializeUser);
+    passport.deserializeUser(deserializeUser);
+    //user login
+    app.post('/api/project/login', passport.authenticate('project'), Login);
+    app.post('/api/project/register', register);
+
+    function register(req, res){
+        var new_user = req.body;
+        api.findUserByUsername(new_user.username)
+            .then(
+                function(user){
+                    if(user){
+                        res.json(null);
+                    }else{
+                        return api.Create(new_user);
+                    }
+                },
+                function(err){
+                    res.status(400).send(err);
+                })
+            .then(
+                function(doc){
+                    if(doc){
+                        req.login(doc, function(err){
+                            if(err){
+                                res.status(400).send(err);
+                            }else {
+                                res.json(doc);
+                            }
+                        });
+                    }
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
+    }
+    function Login(req, res){
+        console.log("login request: " + req);
+        var user = req.user;
+        res.json(user);
+    }
+
+    function serializeUser(user, done){
+        done(null, user);
+    }
+
+    function deserializeUser(user, done){
+        api.FindById(user._id)
+            .then(
+                function(user){
+                    done(null, user);
+                },
+                function(err){
+                    done(null, err);
+                }
+            );
+    }
+    function local(username, password, done){
+        api.findUserByCredentials({username: username, password: password})
+            .then(
+                function(user){
+                    if(!user) return done(null, false);
+                    else return done(null, user);
+                },
+                function(err){
+                    return done(null, err);
+                }
+            );
+    }
 };

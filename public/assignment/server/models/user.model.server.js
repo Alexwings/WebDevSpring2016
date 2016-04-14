@@ -10,7 +10,7 @@ module.exports = function(mongoose) {
         'FindById': findById,
         'Create': create,
         'Delete': Delete,
-        'Update': update,
+        'Update': update
     };
     return api;
     function findAll(){

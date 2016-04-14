@@ -4,7 +4,7 @@ module.exports = function(app, model, db){
     var api = model;
     var auth = authenticated;
     var isAdmin = isAdmin;
-    app.post("/api/assignment/login", passport.authenticate('local'), Login);
+    app.post("/api/assignment/login", passport.authenticate('assignment'), Login);
     app.get("/api/assignment/user", auth, findUser);
     app.get("/api/assignment/user/:id", findUserById);
     app.get("/api/assignment/loggedin", Loggedin);
@@ -18,7 +18,7 @@ module.exports = function(app, model, db){
     app.put("/api/assignment/admin/user/:id", isAdmin, updateUser);
     app.delete("/api/assignment/admin/user/:id", isAdmin, deleteUser);
 
-    passport.use(new LocalStrategy(local));
+    passport.use('assignment', new LocalStrategy(local));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 

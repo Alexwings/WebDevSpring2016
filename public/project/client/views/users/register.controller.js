@@ -6,19 +6,22 @@
         .module("OnlineMovieApp")
         .controller("RegisterController", RegisterController);
     function RegisterController($location, UserService) {
+        var model = this
         model.register = regist;
         function regist(user){
-            var new_user = {"username": user.username, "password": user.password, "role":"general"};
-            UserService.createUser(new_user).then(registered, rejected);
+            UserService.register(user).then(registered, rejected);
         }
         function registered(response){
             var data = response.data;
-            UserService.setCurrentUser(data);
-            $location.path("/user/"+data._id);
+            if(data){
+                UserService.setCurrentUser(data);
+                $location.path("/profile");
+            }else{
+                alert("Try change another username!");
+            }
         }
         function rejected(response){
-            alert("Cannot register! Try change another username!");
-            console.log("Cannot create user!");
+            model.error = response.error;
         }
     }
 })()

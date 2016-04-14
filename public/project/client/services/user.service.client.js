@@ -4,20 +4,42 @@
         .factory("UserService", UserService);
     function UserService($rootScope, $http) {
         var api = {
-            'findUserByCredentials': findUserByCredentials,
-            'findUserByUsername':findUserByUsername,
-            'findAllUsers': findAllUsers,
+            //for admin
             'createUser': createUser,
-            'findUserById': findUserById,
+            'findAllUsers': findAllUsers,
+            //'findUserForAdmin': findUserForAdmin,
+            //'updateUserForAdmin': updateUserForAdmin,
             'deleteUserById': deleteUserById,
+            //for general
+            'register': register,
+            'login': loginUser,
+            //'logout': logoutUser,
+            'findUserByUsername':findUserByUsername,
+            'findUserById': findUserById,
             'updateUser': updateUser,
+            //General purpose
             'setCurrentUser': setCurrentUser,
             'getCurrentUser': getCurrentUser
         };
         return api;
-        function findUserByCredentials(username, password) {
-            return $http.get("/api/project/user/username/"+username+"/password/"+password);
+        //General purpose
+        function getCurrentUser(){
+            return $rootScope.currentUser;
         }
+        function setCurrentUser(user){
+            $rootScope.currentUser = user;
+        }
+        //for general
+        function loginUser(username, password) {
+            var credentials = {username: username, password: password};
+            return $http.post("/api/project/login", credentials);
+        }
+        function register(user){
+            return $http.post("/api/project/register", user);
+        }
+
+        //==========================================
+
         function findUserByUsername(username){
             return $http.get("/api/project/user/username/"+username);
         }
@@ -40,12 +62,6 @@
 
         function updateUser(id, user) {
             return $http.put("/api/project/user/"+id, user);
-        }
-        function setCurrentUser(user){
-            $rootScope.currentUser = user;
-        }
-        function getCurrentUser(){
-            return $rootScope.currentUser;
         }
     }
 })();
