@@ -3,6 +3,7 @@ var q = require("q");
 module.exports = function(mongoose) {
     var UserSchema = require("./user.schema.server.js")(mongoose);
     var UserModel = mongoose.model('user', UserSchema);
+    var proUserSchema = require("../../../project/server/models/schemas/user.schema.js")(mongoose);
     var api = {
         'findUserByCredentials': findByCredentials,
         'findUserByUsername': findByUsername,
@@ -13,6 +14,7 @@ module.exports = function(mongoose) {
         'Update': update
     };
     return api;
+
     function findAll(){
         var defer = q.defer();
         UserModel.find(function(err, doc){

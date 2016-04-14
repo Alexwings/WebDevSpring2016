@@ -1,4 +1,4 @@
-module.exports = function(app, model, db){
+module.exports = function(app, model){
     var passport = require('passport');
     var LocalStrategy = require('passport-local').Strategy;
     var api = model;
@@ -40,15 +40,19 @@ module.exports = function(app, model, db){
     }
 
     function deserializeUser(user, done){
-        api.FindById(user._id)
-            .then(
-                function(user){
-                    done(null, user);
-                },
-                function(err){
-                    done(null, err);
-                }
-            );
+        if(user.firstName){
+            api.FindById(user._id)
+                .then(
+                    function(user){
+                        done(null, user);
+                    },
+                    function(err){
+                        done(null, err);
+                    }
+                );
+        }else{
+            //TODO
+        }
     }
 
     function register(req, res){
@@ -229,7 +233,7 @@ module.exports = function(app, model, db){
                     res.status(400).send(err);
                 }
             );
-    };
+    }
     function authenticated(req, res, next){
         if(!req.isAuthenticated()){
             res.send(401);

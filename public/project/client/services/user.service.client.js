@@ -8,7 +8,6 @@
             'createUser': createUser,
             'findAllUsers': findAllUsers,
             //'findUserForAdmin': findUserForAdmin,
-            //'updateUserForAdmin': updateUserForAdmin,
             'deleteUserById': deleteUserById,
             //for general
             'register': register,
@@ -30,6 +29,15 @@
             $rootScope.currentUser = user;
         }
         //for general
+        function updateUser(id, user) {
+            return $http.put("/api/project/user/"+id, user);
+        }
+        function findUserById(id){
+            return $http.get("/api/project/user/"+id);
+        }
+        function findUserByUsername(username){
+            return $http.get("/api/project/user/username/"+username);
+        }
         function logoutUser(){
             return $http.post("/api/project/logout");
         }
@@ -40,31 +48,14 @@
         function register(user){
             return $http.post("/api/project/register", user);
         }
-
-        //==========================================
-
-        function findUserByUsername(username){
-            return $http.get("/api/project/user/username/"+username);
+        function deleteUserById(id){
+            return $http.delete('/api/project/user/'+id);
         }
-
         function findAllUsers() {
             return $http.get("/api/project/user");
         }
-
-        function findUserById(id){
-            return $http.get("/api/project/user/"+id);
-        }
-
         function createUser(usr) {
             return $http.post("/api/project/user", usr);
-        }
-
-        function deleteUserById(id) {
-            return $http.delete("/api/project/user/"+id);
-        }
-
-        function updateUser(id, user) {
-            return $http.put("/api/project/user/"+id, user);
         }
     }
 })();

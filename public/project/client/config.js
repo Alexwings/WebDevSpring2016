@@ -18,12 +18,18 @@
                 })
                 .when("/home", {
                     templateUrl: "views/home/home.view.html",
-                    controller: "HomeController"
+                    controller: "HomeController",
+                    resolve: {
+                        checkCurrentUser: checkCurrentUser
+                    }
                 })
                 .when("/profile", {
                     templateUrl: "views/users/profile.view.html",
                     controller: "ProfileController",
-                    controllerAs: "model"
+                    controllerAs: "model",
+                    resolve: {
+                        checkLoggedin: checkLoggedin
+                    }
                 })
                 .when("/result/:title/type/:type",{
                     templateUrl: "views/movie/result.view.html",
@@ -41,5 +47,37 @@
                 .otherwise({
                     redirectTo:"/home"
                 })
-        })
+        });
+
+    function checkLoggedin($q, $http, $location, $rootScope, UserService){
+        var defer = $q.defer();
+        $http.get('/api/project/loggedin')
+            .then(
+                function(response){
+                    var user = response.data;
+                    if(user !== '0'){
+                        UserService.setCurrentUser(user);
+                        defer.resolve();
+                    }else{
+                        $rootScope.errorMessage = 'Please login!';
+                        defer.resolve();
+                        $location.url('/login');
+                    }
+                }
+            );
+        return defer.promise;
+    }
+    function checkCurrentUser($q, $http, UserService){
+        var defer = $q.defer();
+        $http.get('/api/project/loggedin')
+            .then(
+                function(response){
+                    var user = response.data;
+                    if(user !== '0'){
+                        UserService.setCurrentUser(user);
+                    }
+                    defer.resolve();
+                });
+        return defer.promise;
+    }
 })();

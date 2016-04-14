@@ -16,9 +16,7 @@
             UserService.updateUser(u._id, u).then(updated, rejected);
         }
         function updated(response){
-            if(response.data){
-                UserService.setCurrentUser(data);
-            }
+            init();
         }
         function rejected(error){
             console.log("Something wrong with user client services!");
