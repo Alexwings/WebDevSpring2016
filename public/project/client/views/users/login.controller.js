@@ -6,10 +6,10 @@
         .module("OnlineMovieApp")
         .controller("LoginController", LoginController);
     function LoginController($location, UserService){
-        var model = this
+        var model = this;
         model.login = verifyUser;
         function init(){
-            UserService.setCurrentUser = null;
+            UserService.setCurrentUser(null);
         }
         init();
         function verifyUser(user){
@@ -19,13 +19,13 @@
             if(response.data){
                 console.log(response.data);
                 UserService.setCurrentUser(response.data);
-                $location.path("/user/"+response.data._id);
+                $location.path("/profile");
             }else {
                 alert("Please fill in username and password!");
             }
         }
         function rejected(response){
-            console.log("Something wrong with user client services!");
+            model.error = response.error;
         }
     }
 })()

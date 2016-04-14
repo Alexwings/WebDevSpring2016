@@ -41,7 +41,6 @@ module.exports = function(app, API, db){
             );
     }
     function Login(req, res){
-        console.log("login request: " + req);
         var user = req.user;
         res.json(user);
     }
