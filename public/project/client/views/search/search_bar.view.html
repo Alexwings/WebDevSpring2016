@@ -5,16 +5,15 @@
                     <span class="input-group-addon" id="basic-addon1">
                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                     </span>
-                <input type="text" class="form-control" placeholder="search for...">
+                <input type="text" ng-model="model.req.name" class="form-control" placeholder="search for...">
                     <span class="input-group-btn">
-                        <button class="btn btn-default">Go!</button>
+                        <button ng-click="model.search(model.req)" class="btn btn-default">Go!</button>
                     </span>
             </div>
-            <select class="form-control">
+            <select ng-model="model.req.type" class="form-control">
                 <option>Group By</option>
-                <option>Title</option>
-                <option>Year</option>
-                <option>Movie/TV</option>
+                <option value="movie">Movie</option>
+                <option value="tv">TV</option>
             </select>
         </form>
     </div>

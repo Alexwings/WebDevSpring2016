@@ -33,7 +33,11 @@
                 })
                 .when("/result/:title/type/:type",{
                     templateUrl: "views/movie/result.view.html",
-                    controller: "ResultController"
+                    controller: "ResultController",
+                    controllerAs: 'model',
+                    resolve: {
+                        checkLoggedin: checkLoggedin
+                    }
                 })
                 .when("/detials/:title/type/:type",{
                     templateUrl: "views/movie/detial.view.html",

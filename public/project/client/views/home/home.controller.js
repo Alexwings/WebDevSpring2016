@@ -5,12 +5,16 @@
     angular
         .module("OnlineMovieApp")
         .controller("HomeController", HomeController);
-    function HomeController($scope, $location){
-        $scope.req = {};
-        $scope.setType = setType;
-        $scope.search = search;
+    function HomeController($location){
+        var model = this;
+        model.setType = setType;
+        model.search = search;
+        function init(){
+            model.req = {};
+        }
+        init();
         function setType(type){
-            $scope.req.type = type;
+            model.req.type = type;
         }
         function search(req){
             if(req.type){
