@@ -60,7 +60,7 @@
         }
 
         function addUser(userProto){
-            userProto.password = '123';
+            userProto.password = userProto.username;
             UserService.createUser(userProto)
                 .then(
                     function(res){
@@ -82,7 +82,7 @@
                 function (usr1, usr2) {
                     var com1 = usr1[attr].toLowerCase();
                     var com2 = usr2[attr].toLowerCase();
-                    return com1 < com2;
+                    return com1 > com2;
                 }
             );
             model.users = sortedUser;

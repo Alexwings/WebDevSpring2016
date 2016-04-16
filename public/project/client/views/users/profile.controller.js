@@ -17,6 +17,7 @@
         }
         function updated(response){
             init();
+            alert("User info updated");
         }
         function rejected(error){
             console.log("Something wrong with user client services!");
