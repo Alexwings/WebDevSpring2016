@@ -7,8 +7,9 @@
             //for admin
             'createUser': createUser,
             'findAllUsers': findAllUsers,
-            //'findUserForAdmin': findUserForAdmin,
+            'findUserForAdmin': findUserForAdmin,
             'deleteUserById': deleteUserById,
+            'updateUserForAdmin': updateUserForAdmin,
             //for general
             'register': register,
             'login': loginUser,
@@ -48,14 +49,22 @@
         function register(user){
             return $http.post("/api/project/register", user);
         }
-        function deleteUserById(id){
-            return $http.delete('/api/project/user/'+id);
+        //for admin
+        function updateUserForAdmin(user){
+            return $http.put('/api/project/admin/'+user._id, user);
         }
+        function deleteUserById(id){
+            return $http.delete('/api/project/admin/'+id);
+        }
+        function findUserForAdmin(id){
+            return $http.get('/api/project/admin/'+id);
+        }
+
         function findAllUsers() {
-            return $http.get("/api/project/user");
+            return $http.get("/api/project/admin");
         }
         function createUser(usr) {
-            return $http.post("/api/project/user", usr);
+            return $http.post("/api/project/admin", usr);
         }
     }
 })();

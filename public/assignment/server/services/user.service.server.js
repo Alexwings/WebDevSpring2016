@@ -50,8 +50,6 @@ module.exports = function(app, model){
                         done(null, err);
                     }
                 );
-        }else{
-            //TODO
         }
     }
 

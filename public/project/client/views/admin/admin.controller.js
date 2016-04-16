@@ -10,30 +10,70 @@
         model.removeUser = removeUser;
         model.selectUser = selectUser;
         function init(){
-            //TODO initiate the admin page, get all users
-            console.log("admin page initiated");
+            UserService.findAllUsers()
+                .then(
+                    function(res){
+                        model.users = res.data;
+                    },
+                    function(res){
+                        model.errorMessage = res.err;
+                    }
+                );
         }
-
+        init();
         function selectUser(index){
             if(model.selectedIndex == index){
                 model.selectedIndex = null;
                 model.selected = null;
             }else{
                 model.selectedIndex = index;
-                model.selected = angular.copy(model.users);
+                model.selected = angular.copy(model.users[index]);
             }
         }
 
         function removeUser(user){
-            //TODO remove given user
+            UserService.deleteUserById(user._id)
+                .then(
+                    function(res){
+                        model.users = res.data;
+                    },
+                    function(res){
+                        model.errorMessage = res.data;
+                    }
+                );
+            if(model.selected && model.selected._id === user._id){
+                model.selected = null;
+                model.selectedIndex = null;
+            }
         }
 
         function updateUser(user){
-            //TODO updeate current selected user
+            UserService.updateUserForAdmin(user)
+                .then(
+                    function(res){
+                        model.users = res.data;
+                    },
+                    function(res){
+                        model.errorMessage = res.data;
+                    }
+                );
         }
 
         function addUser(userProto){
-            //TODO create user with default password 123
+            userProto.password = '123';
+            UserService.createUser(userProto)
+                .then(
+                    function(res){
+                        model.users = res.data;
+                        if(model.selected){
+                            model.selected = null;
+                            model.selectedIndex = null;
+                        }
+                    },
+                    function(res){
+                        model.errorMessage = res.data;
+                    }
+                );
         }
 
         function sort(attr) {

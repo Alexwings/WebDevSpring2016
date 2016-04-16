@@ -42,13 +42,38 @@
                 .when("/admin", {
                     templateUrl:"views/admin/admin.view.html",
                     controller: "AdminController",
-                    controllerAs: "model"
+                    controllerAs: "model",
+                    resolve: {
+                        checkAdmin: checkAdmin
+                    }
                 })
                 .otherwise({
                     redirectTo:"/home"
                 })
         });
 
+    function checkAdmin($q, $http, $location, UserService){
+        var defer = $q.defer();
+        $http.get('/api/project/loggedin')
+            .then(
+                function(res){
+                    var user = res.data;
+                    if(user !== '0'){
+                        if(user.role === 'admin'){
+                            UserService.setCurrentUser(user);
+                            defer.resolve();
+                        }else{
+                            defer.reject();
+                            $location.url('/home');
+                        }
+                    }else{
+                        defer.reject();
+                        $location.url('/login');
+                    }
+                }
+            );
+        return defer.promise;
+    }
     function checkLoggedin($q, $http, $location, $rootScope, UserService){
         var defer = $q.defer();
         $http.get('/api/project/loggedin')
@@ -60,7 +85,7 @@
                         defer.resolve();
                     }else{
                         $rootScope.errorMessage = 'Please login!';
-                        defer.resolve();
+                        defer.reject();
                         $location.url('/login');
                     }
                 }

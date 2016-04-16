@@ -3,6 +3,8 @@ module.exports = function(app, API, db){
     var passport = require('passport');
     var localStrategy = require('passport-local').Strategy;
 
+    var auth = authenticated;
+    var isAdmin = isAdmin;
     //user login
     app.post('/api/project/login', passport.authenticate('project'), Login);
     app.post('/api/project/register', register);
@@ -12,9 +14,32 @@ module.exports = function(app, API, db){
     app.put('/api/project/user/:id', updateUser);
     app.get("/api/project/user/username/:username", findByUserName);
     app.get("/api/project/user/:id", findById);
-    app.delete('/api/project/user/:id', deleteUser);
-    app.get('/api/project/user/', findAll);
-    app.post('/api/project/user', createUser);
+    //admin
+    app.get("/api/project/admin/:id", findById);
+    app.delete('/api/project/admin/:id', deleteUser);
+    app.get('/api/project/admin', findAll);
+    app.post('/api/project/admin', createUser);
+    app.put('/api/project/admin/:id', updateUser);
+
+    function authenticated(req, res, next){
+        if(!req.user.isAuthenticated()){
+            res.send(401);
+        }else{
+            next();
+        }
+    }
+
+    function isAdmin(req, res, next){
+        if(req.user.isAuthenticated()){
+            if(req.user.role === 'admin'){
+                next();
+            }else{
+                res.send(403);
+            }
+        }else{
+            res.send(403);
+        }
+    }
 
     function createUser(req, res){
         var new_user = req.body;
@@ -179,11 +204,23 @@ module.exports = function(app, API, db){
 
     passport.use('project', new localStrategy(local));
     passport.serializeUser(serializeUser);
+    passport.deserializeUser(deserializeUser);
 
     function serializeUser(user, done){
         done(null, user);
     }
 
+    function deserializeUser(user, done) {
+        api.FindById(user._id)
+            .then(
+                function (user) {
+                    done(null, user);
+                },
+                function (err) {
+                    done(null, err);
+                }
+            );
+    }
     function local(username, password, done){
         api.findUserByCredentials({username: username, password: password})
             .then(
