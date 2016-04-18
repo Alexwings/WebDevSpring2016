@@ -10,6 +10,7 @@
             createPost: create,
             findPostById: findById,
             findPostsByTitle: findByTitle,
+            findPostByTitle: findPostByTitle,
             updatePost: update,
             deletePost: deletePost
         }
@@ -20,11 +21,15 @@
         function findById(id){
             return $http.get("/api/project/post/"+id)
         }
-        function findByTitle(title){
-            return $http.get("/api/project/post/title/"+title)
+        function findByTitle(title, type){
+            var set = {Title: title, Type: type};
+            return $http.post("/api/project/post/title", set)
         }
-        function update(post){
-            return $http.put("/api/project/post",post)
+        function findPostByTitle(title){
+            return $http.post("/api/project/post/title/"+title);
+        }
+        function update(id, post){
+            return $http.put("/api/project/post/"+id, post)
         }
         function deletePost(id){
             return $http.delete("/api/project/post/"+id)

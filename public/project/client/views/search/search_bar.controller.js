@@ -5,7 +5,7 @@
     angular
         .module("OnlineMovieApp")
         .controller("BarController", BarController);
-    function BarController(MovieService){
+    function BarController($location){
         var model = this;
         model.search = search;
         function init(){ model.req = {}};

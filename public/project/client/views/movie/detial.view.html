@@ -3,16 +3,15 @@
         <!--The movie poster-->
         <div class="container">
             <div class="col-lg-5 col-md-5">
-                <img ng-src="{{model.poster}}" height="400" width="280">
+                <img ng-src="{{model.post.Poster}}" height="400" width="280">
             </div>
             <!--The movie information-->
             <div class="col-lg-4 col-md-4">
-                <h2>{{model.title}}</h2>
-                <h4>Director: {{model.Director}}</h4>
-                <h4>Actors: {{model.Actors}}</h4>
-                <h4>Language: {{model.Language}}</h4>
-                <h4>Awards: {{model.Awards}}</h4>
-                <p>Discription: {{model.Plot}}</p>
+                <h2>{{model.post.Title}}</h2>
+                <h4>Director: {{model.post.Director}}</h4>
+                <h4>Actors: {{model.post.Actors}}</h4>
+                <h4>Awards: {{model.post.Awards}}</h4>
+                <p>Discription: {{model.post.Plot}}</p>
                 <!--Put Rating graphic here-->
             </div>
         </div>
@@ -40,5 +39,5 @@
             </div>
         </div>
     </div>
-    <div ng-include="'../search/search_bar.view.html'"></div>
+    <div ng-include="'views/search/search_bar.view.html'"></div>
 </div>

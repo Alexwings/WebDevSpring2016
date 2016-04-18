@@ -1,91 +1,36 @@
 /**
  * Created by Alex on 3/25/2016.
  */
-module.exports = function(app, db){
-    var posts = require("./posts.mock.json");
-    var uuid = require("node-uuid");
+module.exports = function(mongoose){
+    var PostSchema = require("./schemas/post.schema.js")(mongoose);
+    var PostModel = mongoose.model('project_post', PostSchema);
     var api = {
-        CreatePosts: create,
-        findPostById: findById,
+        CreatePosts: createPost,
+        findPostById: findPostById,
         findPostsByTitle: findByTitle,
-        findPostByImdbID:findByImdb,
+        findPostByTitle:findPostByTitle,
         updatePost: update,
-        deletePost: remove
+        deletePost: removePost
     };
     return api;
 
-    function create(post){
-        var id = uuid.v1();
-        var p = {"_id": id};
-        p.Title = post.Title;
-        p.Year = post.Year;
-        p.Rated = post.Rated;
-        p.Director = post.Director;
-        p.Actors = post.Actors;
-        p.Plot = post.Plot;
-        p.Language = post.Language;
-        p.Awards = post.Awards;
-        p.Poster = post.Poster;
-        p.imdbRating = post.imdbRating;
-        p.imdbID = post.imdbID;
-        p.Type = post.Type;
-        p.TotalRating = Post.imdbRating;
-        posts.push(p);
-        return p;
+    function createPost(post){
+        return PostModel.create(post);
     }
-    function findById(id){
-        for(var i = 0; i < posts.length; i++){
-            if(posts[i]._id == id){
-                return posts[i];
-            }
-        }
-        return null;
+    function findPostById(id){
+        return PostModel.findById(id);
     }
     function findByTitle(title, type){
-        var results = [];
-        for(var i = 0; i < posts.length; i++){
-            if(posts[i].Title == title && posts[i].Type == type){
-                results.push(posts[i]);
-            }
-        }
-        return results;
+        var set = {Title: title, Type: type};
+        return PostModel.find(set);
     }
-    function findByImdb(imdbId){
-        for(var i = 0; i < posts.length; i++){
-            if(posts[i].imdbID == imdbId){
-                return posts[i];
-            }
-        }
-        return null;
+    function findPostByTitle(title){
+        return PostModel.findOne({Title: title});
     }
-    function update(post){
-        var p = findById(post._id);
-        if(p){
-            p._id = post._id;
-            p.Title = post.Title;
-            p.Year = post.Year;
-            p.Rated = post.Rated;
-            p.Director = post.Director;
-            p.Actors = post.Actors;
-            p.Plot = post.Plot;
-            p.Language = post.Language;
-            p.Awards = post.Awards;
-            p.Poster = post.Poster;
-            p.imdbRating = post.imdbRating;
-            p.imdbID = post.imdbID;
-            p.Type = post.Type;
-            p.TotalRating = Post.imdbRating;
-            return p;
-        }
-        return null;
+    function update(id, post){
+        return PostModel.update({_id: id}, {$set: post});
     }
-    function remove(id){
-        for(var i = 0; i < posts.length; i++){
-            if(posts[i]._id == id){
-                posts.splice(i,1);
-                return true;
-            }
-        }
-        return true;
+    function removePost(id){
+        return PostModel.remove({_id: id});
     }
 }

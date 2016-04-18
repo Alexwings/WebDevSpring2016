@@ -36,12 +36,16 @@
                     controller: "ResultController",
                     controllerAs: 'model',
                     resolve: {
-                        checkLoggedin: checkLoggedin
+                        checkCurrentUser: checkCurrentUser
                     }
                 })
-                .when("/detials/:title/type/:type",{
+                .when("/detials/post/imdbId/:imdbId",{
                     templateUrl: "views/movie/detial.view.html",
-                    //controller: "DetialController"
+                    controller: "DetialController",
+                    controllerAs: 'model',
+                    resolve: {
+                        checkCurrentUser: checkCurrentUser
+                    }
                 })
                 .when("/admin", {
                     templateUrl:"views/admin/admin.view.html",

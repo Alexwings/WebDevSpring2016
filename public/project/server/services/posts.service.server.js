@@ -1,32 +1,117 @@
-module.exports = function(app, API, db){
+module.exports = function(app, API){
     var api = API;
+    app.post("/api/project/post", Create);
+    app.get("/api/project/post/:id", findById);
+    app.post("/api/project/post/title", findByTitle);
+    app.post("/api/project/post/title/:title", findPostByTitle);
+    app.put("/api/project/post/:id", Update);
+    app.delete("/api/project/post/:id", Delete);
+
     //CreatePosts
-    app.post("/api/project/post", function(req, res){
+    function Create(req, res){
         var post = req.body;
-        var new_post = api.CreatePost(post);
-        res.json(new_post);
-    });
+        api.findPostByTitle(post.Title)
+            .then(
+                function(p){
+                    if(p){
+                        res.send(null);
+                    }else{
+                        return api.CreatePosts(post);
+                    }
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(p){
+                    console.log(p);
+                    res.json(p);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
+    }
     //findPostById
-    app.get("/api/project/post/:id", function(req, res){
+    function findById(req, res){
         var pid = req.params.id;
-        var p = api.findPostById(pid);
-        res.json(p);
-    })
+        api.findPostById(pid)
+            .then(
+                function(p){
+                    res.json(p);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
+    }
     //findPostsByTitle
-    app.get("/api/project/post/title/:title", function(req, res){
-            var posts = api.findPostsByTitle(req.params.title);
-            res.send(posts);
-    });
+    function findByTitle(req, res){
+        var keys = req.body;
+        api.findPostsByTitle(keys.Title, keys.Type)
+            .then(
+                function (ps) {
+                    if(ps){
+                        res.json(ps);
+                    }else{
+                        res.send(null);
+                    }
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+    function findPostByTitle(req, res){
+        var t = req.params.title;
+        api.findPostByTitle(t)
+            .then(
+                function(p){
+                    if(p){
+                        res.json(p);
+                    }else{
+                        res.send(null);
+                    }
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            )
+    }
     //updatePost
-    app.put("/api/project/post", function(req, res){
+    function Update(req, res){
+        var id = req.params.id;
         var post = req.body;
-        var new_post = api.updatePost(post);
-        res.send(new_post);
-    })
+        api.updatePost(id, post)
+            .then(
+                function(stat){
+                    return api.findById(id);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(p){
+                    res.json(p);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
+    }
     //deletePost
-    app.delete("/api/project/post/:id", function(req, res){
+    function Delete(req, res){
         var pid = req.params.id;
-        var success = api.deletePost(pid);
-        res.send(success);
-    })
+        api.deletePost(pid)
+            .then(
+                function(stat){
+                    res.send(stat);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
+    }
 }

@@ -3,8 +3,8 @@
  */
 //reference Professor's experiments/omdbapi/routing/services/movie.service.js
 (function(){
-    var SEARCH_URL = "http://www.omdbapi.com/?s=TITLE&Type=movie";
-    var DETAILS_URL = "http://www.omdbapi.com/?i=IMDBID&type=movie&plot=short&tomatoes=false";
+    var SEARCH_URL = "http://www.omdbapi.com/?s=TITLE&type=movie";
+    var DETAILS_URL = "http://www.omdbapi.com/?i=IMDBID&plot=short&r=json";
 
     angular
         .module("OnlineMovieApp")
@@ -18,10 +18,9 @@
 
         return api;
 
-        function findMovieByImdbId(imdbId, type) {
+        function findMovieByImdbId(imdbId) {
             var url = DETAILS_URL
-                .replace("IMDBID", imdbId)
-                .replace("movie", type);
+                .replace("IMDBID", imdbId);
             return $http.get(url);
         }
 

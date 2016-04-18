@@ -1,18 +1,30 @@
 <!-- Page Content -->
-<div class="row page-content">
-    <h3 ng-show="message">Result Not Found!</h3>
-    <div class="col-lg-9 col-md-9">
-        <div ng-repeat="movie in movies">
-            <div class="thumbnails col-lg-4 col-md-4">
-                <a href="" ng-click="toDetials(movie)"><img ng-src="{{movie.Poster}}" height="300", width="253"></a>
-                <div class="caption">
-                    <h3>{{movie.Title}}</h3>
-                    <h4>{{movie.Director}}</h4>
-                    <p>{{movie.Plot}}</p>
+<div class="page-content">
+    <div class="row">
+        <h1 ng-show="!model.message" class="text-center">Local results</h1>
+        <div class="col-lg-9 col-md-9">
+            <div ng-repeat="post in model.posts">
+                <div class="thumbnails col-lg-4 col-md-4">
+                    <a href="" ng-click="model.toDetials(post)"><img ng-src="{{post.Poster}}" height="200" width="153"></a>
+                    <div class="caption">
+                        <h4>{{post.Title}}</h4>
+                    </div>
                 </div>
             </div>
         </div>
+        <h1 ng-show="!model.imdbmessage" class="text-center">IMDB results</h1>
+        <div class="col-lg-9 col-md-9">
+            <div ng-repeat="movie in model.movies">
+                <div class="thumbnails col-lg-4 col-md-4">
+                    <a href="" ng-click="model.toDetials(movie)"><img ng-src="{{movie.Poster}}" height="200" width="153"></a>
+                    <div class="caption">
+                        <h4>{{movie.Title}}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Search Bar-->
+        <div ng-include="'views/search/search_bar.view.html'"></div>
     </div>
-    <!--Search Bar-->
-    <div ng-include="'views/search/search_bar.view.html'"></div>
 </div>
+

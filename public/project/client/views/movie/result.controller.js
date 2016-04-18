@@ -5,32 +5,48 @@
     angular
         .module("OnlineMovieApp")
         .controller("ResultController", ResultController);
-    function ResultController($scope, $location, $routeParams, MovieService, PostService){
-        $scope.movies = [];
-        $scope.message = false;
-        $scope.toDetials = toDetials;
+    function ResultController($location, $routeParams, MovieService, PostService){
+        var model = this;
+        model.message = false;
+        model.imdbmessage = false;
+        model.toDetials = toDetials;
         var title = $routeParams.title;
         var type = $routeParams.type;
-        //PostService.findPostsByTitle(title).then(renderSuccess, renderError);
-        MovieService.findMoviesByTitle(title, type).then(renderMovie, renderError);
-        function toDetials(movie){
-            $location.path("/detials/"+movie.title+'/type/'+movie.type);
+        function init(){
+            PostService.findPostsByTitle(title, type)
+                .then(
+                    function(res){
+                        var ps = res.data;
+                        if(ps.length > 0){
+                            model.posts = ps;
+                        }else{
+                            model.message = true;
+                        }
+                    },
+                    function(res){
+                        model.message = true;
+                        alert("Error Occurred when retrieving movie info!");
+                    }
+                );
+            MovieService.findMoviesByTitle(title, type)
+                .then(
+                    function(res){
+                       var movieInfo = res.data;
+                        if(movieInfo.Response == "True"){
+                            model.movies = res.data.Search;
+                        }else{
+                            model.imdbmessage = true;
+                        }
+                    },
+                    function(err){
+                        model.imdbmessage = true;
+                        model.errorMessage = err;
+                    }
+                );
         }
-        function renderSuccess(response){
-            if(response.data){
-                console.log(response.data);
-                $scope.movies = response.data;
-            }
-        }
-        function renderMovie(response){
-            if(response.data.Response == "False"){
-                $scope.message = true;
-            }else{
-                $scope.movies = response.data.Search;
-            }
-        }
-        function renderError(response){
-            $scope.message = true;
+        init();
+        function toDetials(movie) {
+            $location.url("/detials/post/imdbId/" + movie.imdbID);
         }
     }
-})()
+})();
