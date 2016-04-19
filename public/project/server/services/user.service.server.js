@@ -16,8 +16,8 @@ module.exports = function(app, API, db){
     app.get("/api/project/user/:id", findById);
     //admin
     app.get("/api/project/admin/:id", findById);
-    app.delete('/api/project/admin/:id', deleteUser);
-    app.get('/api/project/admin', findAll);
+    app.delete('/api/project/admin/:id', isAdmin, deleteUser);
+    app.get('/api/project/admin', isAdmin, findAll);
     app.post('/api/project/admin', createUser);
     app.put('/api/project/admin/:id', updateUser);
 
