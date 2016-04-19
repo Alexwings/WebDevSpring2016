@@ -9,7 +9,6 @@
         var model = this
         model.register = regist;
         function regist(user){
-            user.role = "admin";
             UserService.register(user).then(registered, rejected);
         }
         function registered(response){
