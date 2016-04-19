@@ -30,7 +30,7 @@ module.exports = function(app, API, db){
     }
 
     function isAdmin(req, res, next){
-        if(req.user.isAuthenticated()){
+        if(req.isAuthenticated()){
             if(req.user.role === 'admin'){
                 next();
             }else{
