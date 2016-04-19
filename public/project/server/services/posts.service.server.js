@@ -14,18 +14,20 @@ module.exports = function(app, API){
             .then(
                 function(p){
                     if(p){
+                        console.log("Found post");
                         res.send(null);
                     }else{
                         return api.CreatePosts(post);
                     }
                 },
                 function(err){
+                    console.log("find Title err");
                     res.status(400).send(err);
                 }
             )
             .then(
                 function(p){
-                    console.log(p);
+                    console.log("create post");
                     res.json(p);
                 },
                 function(err){

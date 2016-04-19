@@ -1,8 +1,13 @@
 <!-- Page Content -->
-<div class="page-content">
-    <div class="row">
-        <h1 ng-show="!model.message" class="text-center">Local results</h1>
-        <div class="col-lg-9 col-md-9">
+    <div class="row page-content">
+        <!--Search Bar-->
+        <div ng-include="'views/search/search_bar.view.html'"></div>
+        <!--Page content-->
+        <div>
+            <h1 class="col-lg-9 col-md-9 col-lg-offset-3 col-md-offset-3 text-center"
+                ng-show="!model.message">Local results</h1>
+        </div>
+        <div class="col-lg-9 col-md-9 col-lg-offset-3 col-md-offset-3">
             <div ng-repeat="post in model.posts">
                 <div class="thumbnails col-lg-4 col-md-4">
                     <a href="" ng-click="model.toDetials(post)"><img ng-src="{{post.Poster}}" height="200" width="153"></a>
@@ -12,8 +17,11 @@
                 </div>
             </div>
         </div>
-        <h1 ng-show="!model.imdbmessage" class="text-center">IMDB results</h1>
-        <div class="col-lg-9 col-md-9">
+        <div>
+            <h1 class="col-lg-9 col-md-9 col-lg-offset-3 col-md-offset-3 text-center"
+                ng-show="!model.imdbmessage">IMDB results</h1>
+        </div>
+        <div class="col-lg-9 col-md-9 col-lg-offset-3 col-md-offset-3">
             <div ng-repeat="movie in model.movies">
                 <div class="thumbnails col-lg-4 col-md-4">
                     <a href="" ng-click="model.toDetials(movie)"><img ng-src="{{movie.Poster}}" height="200" width="153"></a>
@@ -23,8 +31,5 @@
                 </div>
             </div>
         </div>
-        <!--Search Bar-->
-        <div ng-include="'views/search/search_bar.view.html'"></div>
     </div>
-</div>
 

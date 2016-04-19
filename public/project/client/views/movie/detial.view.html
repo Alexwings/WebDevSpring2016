@@ -17,25 +17,23 @@
         </div>
         <hr class="divider">
         <!--Comment form-->
-        <div class="well">
+        <div class="well comment">
             <h4>Leave a Comment:</h4>
             <form role="form">
                 <div class="form-group">
-                    <textarea class="form-control" rows="3" title="Your comment here"></textarea>
+                    <textarea ng-model="model.comment.content" class="form-control" rows="3" title="Your comment here"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button ng-click="model.submit(model.comment)" class="btn btn-primary">Submit</button>
             </form>
         </div>
         <hr>
         <!-- Comment of this movie-->
-        <div class="media">
+        <div class="media" ng-repeat="com in model.comments">
             <div class="media-body">
-                <h4 class="media-heading">Start Bootstrap
-                    <small>August 25, 2014 at 9:30 PM</small>
+                <h4 class="media-heading">{{com.user}}
+                    <small>{{com.time}}</small>
                 </h4>
-                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
-                Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
-                vulputate fringilla. Donec lacinia congue felis in faucibus.
+                {{com.content}}
             </div>
         </div>
     </div>

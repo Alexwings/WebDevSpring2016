@@ -1,29 +1,73 @@
-module.exports = function(app, API, db) {
+module.exports = function(app, API) {
     var api = API;
+    app.post("/api/project/comment", createComment);
+    app.get("/api/project/comment/user/:username", findByUser);
+    app.get("/api/project/comment/post/:title", findByPost);
+    app.get("/api/project/comment/:id", findById);
+    app.delete("/api/project/comment/:id", deleteComment);
     //CreateComment
-    app.post("/api/project/user/:userId/movie/:movieId/comment", function(req, res){
+    function createComment(req, res){
         var comment = req.body;
-        var userId = req.params.userId;
-        var movieId = req.params.movieId;
-        var new_comment = api.CreateComment(userId, movieId, comment);
-        res.send(new_comment);
-    })
+        api.CreateComment(comment)
+            .then(
+                function(c){
+                    res.json(c);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
+    }
     //findCommentsByUser
-    app.get("/api/projcet/user/:id/comment", function(req, res){
-        var id = req.params.id;
-        var comments = api.findCommentsByUser(id);
-        res.send(comments);
-    })
+    function findByUser(req, res){
+        var username = req.params.username;
+        api.findCommentsByUser(username)
+            .then(
+                function(coms){
+                    res.json(coms);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
+    }
     //findCommentsByMovie
-    app.get("/api/project/movie/:id/comment", function(req, res){
+    function findByPost(req, res){
+        var title = req.params.title;
+        api.findCommentsByMovie(title)
+            .then(
+                function(coms){
+                    res.json(coms);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
+    }
+    //findById
+    function findById(req,res){
         var id = req.params.id;
-        var comments = api.findCommentsByMovie(id);
-        res.send(comments);
-    })
+        api.findCommentById(id)
+            .then(
+                function(comment){
+                    res.json(comment);
+                },
+                function(err){
+                    res.status(404).send(err);
+                }
+            );
+    }
     //deleteCommentById
-    app.delete("/api/project/comment/:id", function(req, res){
-        var id = req.params.id;
-        var success = api.deleteCommentById(id);
-        res.send(success);
-    })
-}
+     function deleteComment(req, res){
+         var id = req.params.id;
+         api.deleteCommentById(id)
+             .then(
+                 function(stat){
+                     res.send(stat);
+                 },
+                 function(err){
+                     res.status(400).send(err);
+                 }
+             );
+    }
+};

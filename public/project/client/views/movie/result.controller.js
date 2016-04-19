@@ -17,6 +17,7 @@
                 .then(
                     function(res){
                         var ps = res.data;
+                        console.log(res.data);
                         if(ps.length > 0){
                             model.posts = ps;
                         }else{
