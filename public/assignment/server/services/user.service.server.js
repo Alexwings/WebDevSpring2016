@@ -55,7 +55,7 @@ module.exports = function(app, model){
 
     function register(req, res){
         var user = req.body;
-        user.roles = ['student']
+        user.roles = ['student'];
         api.findUserByUsername(user.username)
             .then(
                 function(doc){
@@ -197,7 +197,7 @@ module.exports = function(app, model){
     function createUser(req, res){
         var new_user = req.body;
         if(!new_user.roles){
-            new_user.roles = ['student'];
+            new_user.roles = ['admin'];
         }
         if(typeof new_user.roles == 'String'){
             new_user.roles = new_user.roles.split(',');
