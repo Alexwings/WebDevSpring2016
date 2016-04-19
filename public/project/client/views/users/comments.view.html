@@ -1,8 +1,34 @@
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-    <h1>Posts:</h1>
-    <ul>
-        <li><a>title1</a></li>
-        <li><a>title2</a></li>
-        <li><a>title3</a></li>
-    </ul>
+<div class="well">
+    <h2>Comments</h2>
+    <h3>{{model.user.username}}</h3>
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="info">
+            <th>
+                <a href="" ng-click="model.sort('user')" id="title"><span class="caret"></span></a>
+                <label for="title">Movie</label>
+            </th>
+            <th>
+                <label>User</label>
+            </th>
+            <th>
+                <label>Content</label>
+            </th>
+            <th>
+                <label>Action</label>
+            </th>
+            </thead>
+            <tr ng-repeat="comment in model.comments">
+                <td>{{comment.post}}</td>
+                <td>{{comment.user}}</td>
+                <td>{{comment.content}}</td>
+                <td>
+                    <button class="btn btn-danger btn-md">
+                        <span ng-click="model.removeComment(comment._id)" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                </td>
+            </tr>
+        </table>
+        <button ng-click="model.back()" class="btn btn-primary">Back</button>
+    </div>
 </div>

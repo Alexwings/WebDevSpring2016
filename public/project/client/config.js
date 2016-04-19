@@ -55,6 +55,14 @@
                         checkAdmin: checkAdmin
                     }
                 })
+                .when("/user/comments",{
+                    templateUrl: "views/users/comments.view.html",
+                    controller: "UserCommentController",
+                    controllerAs: "model",
+                    resolve: {
+                        checkLoggedin: checkLoggedin
+                    }
+                })
                 .otherwise({
                     redirectTo:"/home"
                 })
