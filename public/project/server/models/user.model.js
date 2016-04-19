@@ -17,6 +17,7 @@ module.exports = function(mongoose) {
         return UserModel;
     }
     function updateUser(id, user){
+        delete user._id;
         return UserModel.update({_id: id}, {$set: user});
     }
     function removeUser(id){
