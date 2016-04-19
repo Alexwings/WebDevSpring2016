@@ -28,6 +28,7 @@ module.exports = function(mongoose){
         return PostModel.findOne({Title: title});
     }
     function update(id, post){
+        delete post._id;
         return PostModel.update({_id: id}, {$set: post});
     }
     function removePost(id){
